@@ -1,0 +1,116 @@
+section.comite {
+    display: grid;
+    grid: auto-flow / 1fr 1fr;
+    grid-template-columns: repeat(2, 4fr);
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.comite_titre{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 0;
+    text-shadow: 1px 1px 5px rgb(17, 17, 17);
+    font-weight: 500;
+}
+
+.carte{
+    margin: auto;
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 20px;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.15);
+    /* overflow: hidden; */
+    transition: ease-in-out 0.5s;
+}
+
+.fonctions-1{
+    height: 155px;
+}
+
+.fonctions-2 {
+    height: 185px;
+}
+
+.fonctions-3 {
+    height: 200px;
+}
+
+.fonctions-4 {
+    height: 230px;
+}
+
+.fonctions-5 {
+    height: 260px;
+}
+
+.carte:hover{
+    height: auto;
+    padding-bottom: 20px;
+    transition: ease-in-out 0.5s;
+}
+
+.imgBx{
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    top: 0;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.carte:hover .imgBx {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    transition: ease-in-out 0.5s;
+}
+
+h2.identite{
+    text-align: center;
+    font-size: 1.3em;
+    margin-top: -65px;
+    font-weight: bold;
+}
+
+h2 span.fonction{
+    font-size: 0.8em;
+    font-weight: 400;
+}
+
+.data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+}
+
+.carte:hover .data{
+    opacity: 1;
+}
+
+.data i{
+    color: #695185;
+}
+
+@media screen and (max-width: 950px) {
+    section.comite{
+        grid-template-columns: repeat(1, 4fr);
+    }
+
+    .carte {
+        width: 80%;
+    }
+}

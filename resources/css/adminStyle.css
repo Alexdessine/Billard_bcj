@@ -1,0 +1,298 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* overflow-y: hidden; */
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-auto-rows: minmax(100px, auto);
+}
+
+
+
+.one{
+    /* background-color: rgb(231, 231, 231); */
+    background:linear-gradient(to right, rgb(231,231,231), rgb(212, 212, 212));
+    grid-column: 1;
+    grid-row: 1/12;
+    height: 100vh;
+    border-right: 2px solid rgb(155, 155, 155);
+    box-shadow: 2px 0px 5px rgb(0, 0, 0, 0.15);
+    z-index: 1;
+}
+/* 
+@media screen and (min-width: 1024px) and (max-width: 2560px) {
+    .one{
+        width: 250px;
+    }
+} */
+
+.img_bcj_admin {
+    max-width: 100%;
+    width: 40%;
+    display: block;
+    margin: auto;
+    padding-top: 25px;
+}
+
+
+
+.one ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: center;
+    padding: 0;
+    margin-top: 50px;
+}
+
+.one ul li{
+    height: 50px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.one a{
+    text-decoration: none;
+    color: rgb(10, 10, 10);
+    font-weight: 400;
+    /* padding: 0 50px; */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.one a.active{
+    cursor: default;
+    color: rgb(69, 133, 252);
+    pointer-events: none;
+}
+
+.one a.active:hover{
+    text-decoration: none;
+    color:rgb(69,133,252);
+}
+
+.one a:hover{
+    color: rgb(99, 99, 99);
+    text-decoration: underline;
+}
+
+.one ul li a i{
+    font-size: 0.8em;
+    padding: 5px;
+    align-items: center;
+}
+
+.one ul li a i:hover{
+    text-decoration: none;
+}
+
+
+.two{
+    grid-column:2/6;
+    border-bottom: solid 1px rgb(99, 99, 99);
+}
+
+.two h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 100%;
+    height: 100%;
+}
+
+.three{
+    grid-column: 2/6;
+    grid-row: 2/10;
+    padding-bottom: 100px;
+}
+
+.three h5{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.three table{
+    max-width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.three a{
+    text-decoration: none;
+    color: rgb(15, 15, 15);
+}
+
+.three .fa-trash:hover{
+    color: #e05649;
+}
+
+.three .fa-pen:hover{
+    color: #79e049;
+}
+
+.three .boutons{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.three .boutons a .fa-trash:hover{
+    color: white;
+}
+
+.three .edit-form{
+    max-width: 80%;
+    width: 50%;
+    margin:auto;
+}
+
+.three .participants{
+    max-width: 80%;
+    width:50%;
+    margin: auto;
+}
+
+.three h2{
+    text-align: center;
+    margin-top: 25px;
+}
+
+.three .bouton{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.table .win{
+    color: green !important;
+    font-weight: 700;
+}
+
+/* Affichage comité */
+.three td img{
+    max-width: 25%;
+}
+
+.three .comiteImg{
+    width: 80px;
+    margin-bottom:5px;
+}
+
+
+/* Affichage comité */
+
+/* Affichage pagination */
+.pagination{
+    max-width: 100%;
+    display: flex;
+    margin: auto;
+    gap: 5px;
+}
+
+.pagination a{
+    text-decoration: none;
+    color: black;
+}
+
+
+/* Affichage pagination */
+
+/* Affichage alerte */
+.alert{
+    max-width: 35%;
+    margin: auto;
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 10px;
+    animation: fadeOut 3s ease forwards;
+}
+
+@keyframes fadeOut {
+    0%{
+        opacity: 1; 
+    }
+    90%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        display: none;
+    }
+}
+
+/* Affichage alerte */
+
+
+/* Page de login */
+
+body.login{
+    background: linear-gradient(94deg, #ff65a3 , #0e4daa);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.loginForm{
+    max-width:80%;
+    width:600px;
+    background-color: white;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 150px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+.loginForm p{
+    margin-top: 20px;
+}
+
+/* Page de login */
+
+/* Register Start */
+
+.registration,
+.session {
+    /* background-color:#2578b8; */
+    background-image: url('https://zupimages.net/up/24/46/m0g3.jpg') !important;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.registration .logo,
+.session .logo {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+}
+
+.registration h2,
+.session h2 {
+    margin-top: 50px;
+}
+
+.subscription,
+.login {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 20px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: solid 1px rgba(255, 255, 255, 0.25);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.35);
+}
+
+/* Register End */

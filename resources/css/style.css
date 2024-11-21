@@ -1,0 +1,1692 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/unispace-2');
+
+:root {
+    --building-color: #0051ff;
+    --pool-color: #222222;
+    --carambole-color: #ff1e00;
+    --snooker-color: #003cff;
+    --bouton-bleu: #0370b7;
+    --bouton-bleu-hover: #024572;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'Poppins', sans-serif;
+}
+html{
+    height: 100%;
+}
+ul,
+li {
+    display: inline-block;
+    position: relative;
+}
+
+body {
+    height: 100%;
+   background-color: #abbef5 !important;
+}
+
+p{
+    font-weight: 500;
+    text-align: justify;
+    font-size: 1.2em;
+}
+
+p strong{
+    color: #1b1b1b;
+}
+/* ----------------- Calendrier style start large ----------------- */
+.wrapper {
+    width: 100%;
+}
+
+.wrapper header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+header .current-date {
+    font-size: 100%;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+header .icons span i {
+    height: 25px;
+    width: 25px;
+    color: #878787;
+    /* margin: 0 1px; */
+    cursor: pointer;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 50%;
+
+}
+
+header .icons span i:hover {
+    background: #f2f2f2;
+}
+
+.content_accueil h6, .classement_content h6{
+    text-align: center;
+    border-bottom: 2px solid #695185;
+    padding-bottom: 10px;
+    /* font-weight: bold; */
+    /* text-shadow: 0px 0px 5px #878787; */
+}
+
+.presentation_content{
+    margin-bottom: 40px;
+}
+.presentation_content h6{
+    border-bottom: 2px solid #695185;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.presentation_content p.list{
+    font-weight: bold;
+    color: #695185;
+}
+.presentation_content .photo_club{
+    display: flex;
+    justify-content: space-around;
+    max-width: 80%;
+    justify-content: center;
+
+}
+
+.presentation_content .photo_club img{
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px #878787;
+}
+
+.content_accueil .photo_club{
+    margin: auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    box-shadow: 0px 0px 5px #878787;
+}
+
+.content_accueil p strong{
+    font-weight: 600;
+}
+
+
+/* ----------------- Calendrier style end large ----------------- */
+/* ----------------- Mpas start large ----------------- */
+/**
+ * @license
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+/* Set the size of the div element that contains the map */
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+}
+
+/* ---------------- Maps icons set start -------------------------- */
+.property {
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    color: #263238;
+    display: flex;
+    font-size: 14px;
+    gap: 15px;
+    height: 30px;
+    justify-content: center;
+    padding: 4px;
+    position: relative;
+    position: relative;
+    transition: all 0.3s ease-out;
+    width: 30px;
+}
+
+.property::after {
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 9px solid #FFFFFF;
+    content: "";
+    height: 0;
+    left: 50%;
+    position: absolute;
+    top: 95%;
+    transform: translate(-50%, 0);
+    transition: all 0.3s ease-out;
+    width: 0;
+    z-index: 1;
+}
+
+.property .icon {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: #FFFFFF;
+}
+
+.property .icon svg {
+    height: 20px;
+    width: auto;
+}
+
+.property .details {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+}
+
+.property .address {
+    color: #9E9E9E;
+    font-size: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.property .features {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.property .features>div {
+    align-items: center;
+    background: #F5F5F5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;
+    font-size: 10px;
+    gap: 5px;
+    padding: 5px;
+}
+
+/*
+ * Property styles in highlighted state.
+ */
+.property.highlight {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+    height: 80px;
+    padding: 8px 15px;
+    width: auto;
+}
+
+.property.highlight::after {
+    border-top: 9px solid #FFFFFF;
+}
+
+.property.highlight .details {
+    display: flex;
+}
+
+.property.highlight .icon svg {
+    width: 50px;
+    height: 50px;
+}
+.features img{
+    width: 15px;
+}
+.property .bed {
+    color: var(--pool-color);
+}
+
+.property .bath {
+    color: var(--carambole-color);
+}
+
+.property .size {
+    color: var(--snooker-color);
+}
+
+/*
+ * House icon colors.
+ */
+.property.highlight:has(.fa-house) .icon {
+    color: var(--house-color);
+}
+
+.property:not(.highlight):has(.fa-house) {
+    background-color: var(--house-color);
+}
+
+.property:not(.highlight):has(.fa-house)::after {
+    border-top: 9px solid var(--house-color);
+}
+
+/*
+ * Building icon colors.
+ */
+.property.highlight:has(.fa-building) .icon {
+    color: var(--building-color);
+}
+
+.property:not(.highlight):has(.fa-building) {
+    background-color: var(--building-color);
+}
+
+.property:not(.highlight):has(.fa-building)::after {
+    border-top: 9px solid var(--building-color);
+}
+
+/*
+ * Warehouse icon colors.
+ */
+.property.highlight:has(.fa-warehouse) .icon {
+    color: var(--warehouse-color);
+}
+
+.property:not(.highlight):has(.fa-warehouse) {
+    background-color: var(--warehouse-color);
+}
+
+.property:not(.highlight):has(.fa-warehouse)::after {
+    border-top: 9px solid var(--warehouse-color);
+}
+
+/*
+ * Shop icon colors.
+ */
+.property.highlight:has(.fa-shop) .icon {
+    color: var(--shop-color);
+}
+
+.property:not(.highlight):has(.fa-shop) {
+    background-color: var(--shop-color);
+}
+
+.property:not(.highlight):has(.fa-shop)::after {
+    border-top: 9px solid var(--shop-color);
+}
+
+/* ---------------- Maps icons set end -------------------------- */
+
+
+/* ----------------- Maps end large ----------------- */
+
+
+ .partenaires_section .evenements_section .evenements_content .evenement_img {
+     display: flex;
+     justify-content: center;
+     margin: auto;
+     height: auto;
+ }
+
+.presentation_content .legende {
+    text-align: center;
+    font-style: italic;
+    color: #4b4b4b;
+    padding-top: 5px;
+}
+
+
+/* ----------------------- Tarif page start ------------------------ */
+.tarif{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    margin: auto;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.tarif tbody{
+    border-radius: 10px;
+    width: auto;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+    border: 2px solid #695185;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.tarif tr:nth-child(4){
+    border-bottom: 1px solid black;
+}
+
+.tarif tr:nth-child(7){
+    border-bottom: 1px solid black;
+}
+
+.tarif tr:nth-child(8){
+    border-bottom: none;
+}
+
+.tarif td{
+    padding: 5px;
+    font-weight: 500;
+}
+
+.tarif td.adhesion{
+    text-align: center;
+    border-left: none;
+    border-top: none;
+    font-weight: 700;
+    border-right: 1px solid black;
+    background-color: #cdbae2;
+    
+}
+
+.tarif tr:nth-child(8) td.adhesion{
+    border-right: none;
+    border-bottom: none;
+    background-color: white;
+}
+
+.tarif .prix{
+    text-align: right;
+}
+.tarif_content a {
+    text-align: center;
+    background-color: var(--bouton-bleu);
+    color: white;
+    text-decoration: none;
+    width: 80%;
+    height: 40px;
+    margin: auto;
+    border-radius: 10px;
+    padding-top: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+.tarif_content a:hover {
+    background-color: var(--bouton-bleu-hover);
+}
+
+/* ----------------------- Tarif page end ------------------------ */
+
+/* carambole section css start */
+.carambole_calendrier {
+    display: flex;
+    justify-content: center;
+}
+
+ .calendrier_national_section .calendrier_national_content table {
+     margin: auto;
+ }
+
+/* carambole section css end */
+
+/*  Gallerie section start */
+
+.presentation_section.carambole.gallerie{
+    margin-bottom: 50px;
+}
+
+.presentation_content .gallerie {
+    max-width: 1600px;
+    width: 80%;
+    height: auto;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    justify-content: center;
+    grid-gap: 10px;
+}
+
+.presentation_content .gallerie .gallerie-item {
+    width: 300px;
+    height: auto;
+}
+
+.presentation_content .gallerie .gallerie-item img {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px #333;
+    transition: 0.3s ease-in-out;
+}
+
+.presentation_content .gallerie .gallerie-item img:hover{
+    transform: scale(1.3);
+    transition: 0.3s ease-in-out;
+}
+
+
+/*  Gallerie section end */
+
+/* Pagination start */
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    
+}
+
+.pagination a{
+    text-decoration: none;
+    color: var(--bouton-bleu);
+    background-color: rgb(228, 228, 228);
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 16px;
+    padding-top: 9px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.16);
+    font-weight: 500;
+}
+
+.pagination a:first-child{
+    padding-left: 19px;
+}
+
+/* Pagination end */
+
+@media screen and (max-width: 950px) {
+
+section.accueil_section,
+section.partenaires_section,
+section.evenements_section,
+section.localisation_section, 
+section.presentation_section, 
+section.tarif_section, 
+section.classement_section,
+section.calendrier_national_section{
+    display: flex;
+    flex-direction: column;
+    margin: 30px; 
+}
+
+.evenements_section{
+    margin-bottom: -30px;
+}
+
+.tarif_section{
+    margin-bottom: 15px;
+}
+
+.accueil_section .accueil, 
+.partenaires_section .partenaires_titre, 
+.evenements_section .evenements_titre, 
+.localisation_section .localisation_titre, 
+.presentation_section .presentation_titre,
+.tarif_section .tarif_titre, 
+.classement_section .classement_titre,
+.calendrier_national_section .calendrier_national_titre{
+    position: relative;
+    top: 12px;
+    left: -18px;
+    color: white;
+    width: 30%;
+    height: 25px;
+    border-radius: 8px;
+    background-color: #695185;
+    padding-top: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.16);
+    margin-left: 30px;
+}
+.classement_section .classement_titre,
+.calendrier_national_section .calendrier_national_titre {
+    width: 60%;
+}
+
+.classement_section .classement_titre{
+    left: -50px;
+}
+.tarif_section .tarif_titre{
+    width: 40%;
+}
+
+.accueil_section .accueil h5, 
+.partenaires_section .partenaires_titre h5, 
+.evenements_section .evenements_titre h5, 
+.localisation_section .localisation_titre h5,
+.presentation_section .presentation_titre h5,
+.tarif_section .tarif_titre h5,
+.classement_section .classement_titre h5,
+.calendrier_national_section .calendrier_national_titre h5{
+    font-size: 10px;
+    text-align: center;
+    padding: auto;
+    text-transform: uppercase;
+    padding-top: 2px;
+}
+    
+.accueil_section .content_accueil, 
+.partenaires_section .partenaires_content, 
+.evenements_section .evenements_content, 
+.localisation_section .localisation_content,
+.presentation_section .presentation_content,
+.tarif_section .tarif_content, 
+.classement_section .classement_content,
+.calendrier_national_section .calendrier_national_content {
+    background-color: white;
+    padding: 50px 15px 10px 15px;
+    padding-top: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.16);
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+    
+.content_accueil h6 {
+    font-size: 1.5em;
+}
+    
+.content_accueil .photo_club {
+    margin: auto;
+    width: 80%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: 0px 0px 5px #878787;
+}
+
+.presentation_content .photo_club{
+    width: 50%;
+    margin: auto;
+    gap: 10px;
+}
+    
+.presentation_content .photo_club img {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #878787;
+}
+    
+.evenements_section .evenements_content, 
+.presentation_section .presentation_content{
+    margin-bottom: 30px;
+}
+
+.caroussel {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.localisation_section .localisation_content {
+    margin-bottom: 5px;
+    padding-bottom: 20px;
+}
+
+.partenaires_content{
+    margin-bottom: 15px;
+}
+
+/* ----------------- Calendrier style start mobile ----------------- */
+
+.wrapper{
+    width: 100%;
+}
+
+.wrapper header{
+    display: flex;
+    align-items: center;
+    padding: 25px 30px 10px;
+    justify-content: space-between;
+}
+
+header .current-date{
+    font-size: 1.45rem;
+    font-weight: 700;
+}
+
+header .icons span i{
+    height: 38px;
+    width: 38px;
+    color: #878787;
+    margin: 0 1px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+}
+
+header .icons span i:hover{
+    background: #f2f2f2;
+}
+
+/* ----------------- Evenements style start large ----------------- */
+.partenaires_section .evenements_section .evenements_content .evenement_img {
+    width: 55%;
+}
+
+
+/* Css classement start */
+.classement_section{
+    margin: 0 30px;
+}
+.classement_section{
+    margin-bottom: 10px;
+}
+section.calendrier_national_section:last-child{
+    margin-bottom: 20px;
+}
+.calendrier_national_section:last-child{
+    margin-bottom: 10px;
+}
+
+
+.classement_section .classement_content {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    width: auto;
+    gap: 5px;
+}
+
+.classement_table {
+    margin: auto;
+}
+
+.classement_titre_table h6{
+    font-size: 1em;
+}
+
+.classement_table_tableau .table-format {
+    margin: auto;
+}
+
+ .calendrier_national_section .calendrier_national_content table {
+     margin: auto;
+ }
+
+.classement_table_tableau .table-format td,
+.calendrier_national_content .table-format td,
+.calendrier_national_content .table-format th {
+    font-size: 1em;
+    padding-left: 5px;
+    border: solid 1px black;
+    font-weight: 500;
+}
+.calendrier_national_content .table-format th{
+    font-weight: bold;
+    background-color: rgba(0, 110, 255, 0.473);
+}
+.classement_table_tableau .table-format td {
+    text-align: right;
+    padding-right: 5px;
+}
+
+.calendrier_national_content .table-format td,
+.calendrier_national_content .table-format th {
+    padding-right: 5px;
+    font-size: 0.8em;
+}
+
+.classement_table_tableau .table-format td:nth-child(2) {
+    text-align: left;
+    padding-right: 5px;
+}
+.calendrier_national_content .table-format td:first-child,
+.calendrier_national_content .table-format td:nth-child(3){
+    width: 140px;
+}
+.classement_table .classement_tableau_suite {
+    text-align: center;
+    padding: 3px;
+    background-color: var(--bouton-bleu);
+    margin: 10px;
+    border-radius: 5px;
+    font-size: .8em;
+}
+
+.classement_table .classement_tableau_suite:hover {
+    cursor: pointer;
+    background-color: var(--bouton-bleu-hover);
+}
+
+.classement_table .classement_tableau_suite a {
+    text-decoration: none;
+    color: white;
+}
+
+.tarif_content a {
+    display: block;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--bouton-bleu);
+    color: white;
+    text-decoration: none;
+    width: 60%;
+    height: 40px;
+    margin: auto;
+    border-radius: 5px;
+    padding: 6px;
+    padding-top: 12px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+/* Css classement end */
+.carambole_calendrier {
+    display: none;
+}
+.carambole{
+    margin-bottom: 260px;
+}
+
+.carambole_calendrier_mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+}
+
+.carambole_calendrier_mobile a{
+    text-align: center;
+    background-color: var(--bouton-bleu);
+    color: white;
+    text-decoration: none;
+    width: 80%;
+    height: 20px;
+    margin: auto;
+    border-radius: 5px;
+    padding-top: 2px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+.carambole_calendrier_mobile a:hover{
+    background-color: var(--bouton-bleu-hover);
+}
+
+#pdfCanvas{
+    width: 90%;
+    height: auto;
+    margin: auto;
+}
+
+/* Pagination start */
+.pagination a {
+    width: 25px;
+    height: 25px;
+    padding-left: 10px;
+    padding-top: 6px;
+    font-weight: 500;
+}
+
+.pagination a:first-child {
+    padding-left: 12px;
+}
+/* Pagination end */
+}
+
+@media screen and (min-width: 951px) and (max-width: 1300px) {
+
+    .accueil_section, 
+    .partenaires_section, 
+    .presentation_section,
+    .tarif_section,
+    .classement_section,
+    .calendrier_national_section{
+            margin-left: 60px;
+            margin-right: 60px;
+            margin-top: 20px;
+    }
+
+    .evenements_section{
+        margin-top: 20px;
+        margin-bottom: 15px;
+    }
+
+    .localisation_section{
+        margin-bottom: 20px;
+    }
+
+    .partenaires_section{
+        margin-bottom: 50px;
+    }
+
+    .evenements_section .evenements_content {
+        background-color: white;
+        padding: 50px 55px 50px 55px;
+        padding-top: 50px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.16);
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    .accueil_section .accueil, 
+    .partenaires_section .partenaires_titre, 
+    .evenements_section .evenements_titre, 
+    .localisation_section .localisation_titre,
+    .presentation_section .presentation_titre,
+    .tarif_section .tarif_titre, 
+    .classement_section .classement_titre,
+    .calendrier_national_section .calendrier_national_titre {
+        position: relative;
+        margin: auto;
+        top: 25px;
+        color: white;
+        width: 50%;
+        height: 50px;
+        border-radius: 10px;
+        background-color: #695185;
+        padding-top: 14px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.16);
+    }
+
+    
+    .accueil_section .accueil h5, 
+    .partenaires_section .partenaires_titre h5, 
+    .evenements_section .evenements_titre h5, 
+    .localisation_section .localisation_titre h5,
+    .presentation_section .presentation_titre h5,
+    .tarif_section .tarif_titre h5,
+    .classement_section .classement_titre h5,
+    .calendrier_national_section .calendrier_national_titre h5 {
+        font-size: 20px;
+        text-align: center;
+        padding: auto;
+        text-transform: uppercase;
+    }
+        
+    .accueil_section .content_accueil, 
+    .partenaires_section .partenaires_content, 
+    .localisation_section .localisation_content,
+    .presentation_section .presentation_content,
+    .tarif_section .tarif_content,
+    .classement_section .classement_content,
+    .calendrier_national_section .calendrier_national_content{
+        background-color: white;
+        padding: 50px 35px 10px 35px;
+        padding-top: 50px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.16);
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+        .calendrier_national_section .calendrier_national_content{
+            margin: auto;
+            margin-bottom: 20px;
+        }
+    .tarif_section{
+        margin-bottom: 15px;
+    }
+    .content_accueil p, 
+    .presentation_content p {
+        font-size: 1em;
+        text-align: justify;
+        padding-left: 30px;
+        padding-right: 30px;
+        font-weight: 400;
+    }
+
+    .presentation_content h6{
+        font-size: 1.2em;
+    }
+
+    .presentation_content .photo_club {
+        width: 50%;
+        justify-content: center;
+        margin: auto;
+        gap: 15px;
+    }
+        
+    .caroussel {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        margin: auto;
+    }
+
+    .localisation_section .localisation_content {
+        padding-bottom: 25px;
+    }
+            
+    #map{
+        border-radius: 10px;
+    }
+    
+    .partenaires_section .evenements_section .evenements_content .evenement_img {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        width: 55%;
+        height: auto;
+    }
+
+/* Css classement start */
+        .classement_section:first-child {
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+    
+        .classement_section:last-child {
+            margin-bottom: 20px;
+        }
+        
+    
+        .classement_section .classement_accueil h5 {
+            margin: auto;
+            grid-column-start: 4;
+            grid-column-end: 6;
+            text-align: center;
+        }
+    
+        .classement_section .classement_content {
+            display: flex;
+            flex-wrap: wrap;
+            margin: auto;
+            width: auto;
+            gap: 15px;
+        }
+
+        .classement_table{
+            margin: auto;
+            
+        }
+    
+        .classement_table_tableau .table-format{
+            margin: auto;
+            margin-top: 10px;
+        }
+        .classement_table_tableau .table-format td,
+        .calendrier_national_section .calendrier_national_content .table-format td,
+        .calendrier_national_section .calendrier_national_content .table-format th{
+            font-size: 0.6em;
+            padding-left: 5px;
+            border: solid 1px black;
+            font-weight: 500;
+        }
+ .calendrier_national_section .calendrier_national_content table {
+    margin: auto;
+}
+        .calendrier_national_section .calendrier_national_content .table-format {
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        .calendrier_national_section .calendrier_national_content .table-format td{
+            font-size: 0.5em;
+        }
+        .calendrier_national_section .calendrier_national_content .table-format td:first-child,
+                .calendrier_national_section .calendrier_national_content .table-format td:nth-child(2){
+        width: 90px;
+        }
+
+
+        .calendrier_national_section .calendrier_national_content .table-format th{
+            font-weight: bold;
+                background-color: rgba(0, 110, 255, 0.473);
+
+        }
+        
+        .calendrier_national_section .calendrier_national_content .table-format td:nth-child(2){
+            width: 200px;
+        }
+        .calendrier_national_section .calendrier_national_content .table-format td{
+            padding-right: 5px;
+        }
+
+        .classement_table_tableau .table-format td
+{
+            text-align: right;
+            padding-right: 5px;
+        }
+    
+        .classement_table_tableau .table-format td:nth-child(2) {
+            text-align: left;
+            padding-right: 5px;
+        }
+    
+        .classement_table .classement_tableau_suite {
+            text-align: center;
+            background-color: var(--bouton-bleu);
+            border-radius: 5px;
+            width: 80%;
+            margin:auto;
+            margin-top: 10px;
+        }
+    
+        .classement_table .classement_tableau_suite:hover {
+            cursor: pointer;
+            background-color: var(--bouton-bleu-hover);
+        }
+    
+        .classement_table .classement_tableau_suite a {
+            text-decoration: none;
+            color: white;
+            font-size: .7em !important;
+        }
+
+/* Css classement end */
+.carambole_calendrier {
+    display: none;
+}
+
+.carambole_calendrier_mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+}
+
+.carambole_calendrier_mobile a {
+    text-align: center;
+    background-color: var(--bouton-bleu);
+    color: white;
+    text-decoration: none;
+    width: 80%;
+    height: 40px;
+    margin: auto;
+    border-radius: 10px;
+    padding-top: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+.carambole_calendrier_mobile a:hover {
+    background-color: var(--bouton-bleu-hover);
+}
+
+#pdfCanvas {
+    width: 90%;
+    height: auto;
+    margin: auto;
+}
+
+.presentation_content .photo_club {
+    width: 50%;
+    margin: auto;
+    justify-content: center;
+    gap: 10px;
+}
+
+.presentation_content .photo_club img {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #878787;
+}
+
+.classement_table .classement_tableau_suite a {
+    text-decoration: none;
+    color: white;
+    font-size: .5em;
+}
+
+.tarif_content a {
+    display: block;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--bouton-bleu);
+    color: white;
+    text-decoration: none;
+    width: 40%;
+    height: 40px;
+    margin: auto;
+    border-radius: 5px;
+    padding: 6px;
+    padding-top: 7px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+/* Pagination start */
+.pagination a {
+    width: 32px;
+    height: 32px;
+    padding-left: 2px;
+    padding-top: 4px;
+    font-weight: 500;
+}
+
+.pagination a:first-child {
+    padding-left: 2px;
+}
+
+/* Pagination end */
+
+}
+
+@media screen and (min-width:1301px) {
+
+    section{
+        margin: auto;
+        display: grid;
+        max-width: 90%;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-column-gap: 40px;
+    }
+
+    .blackball_section{
+        display: flex;
+        margin: auto;
+        justify-content: center;
+        gap: 350px;
+    }
+
+    .calendrier_national_section{
+        width: 75%;
+    }
+
+    .accueil_section{
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        grid-column-start: 1;
+        grid-column-end: 4;
+        grid-row-start: 1;
+    }
+
+    .tarif_section{
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        grid-column-start: 1;
+        grid-column-end: 6;
+    }
+
+    .localisation_section{
+        grid-column-start: 2;
+        grid-column-end: 5;
+    }
+
+    .presentation_section{
+        grid-column-start: 1;
+        grid-column-end: 6;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    .partenaires_section{
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        grid-column-start: 4;
+        grid-column-end: 6;
+        grid-row-start: 1;
+    }
+    
+    .evenements_section{
+        margin: auto;
+        grid-column-start: 3;
+        grid-column-end: 5;
+        grid-row-start: 2;
+    }
+
+    .calendrier_national_section{
+        grid-column-start: 1;
+        grid-column-end: 6;
+        width: auto;
+        margin: auto;
+    }
+
+/* Classement css Start */
+
+    .classement_section:first-child{
+        grid-column-start: 1;
+        grid-column-end: 3;
+        width: 600px;
+    }
+    .classement_section:last-child{
+        grid-column-start: 4;
+        grid-column-end: 6;
+        width: 570px;
+        margin-bottom: 20px;
+    }
+.classement_table {
+    margin: auto;
+}
+
+.classement_table_tableau .table-format, 
+.calendrier_national_content .table-format {
+    margin: auto;
+    margin-top: 10px;
+}
+    .classement_section .classement_accueil h5,
+    .calendrier_national_titre h5{
+        margin: auto;
+        grid-column-start: 4;
+        grid-column-end: 6;
+        text-align: center;
+    }
+
+    .classement_section .classement_content,
+    .calendrier_national_section .calendrier_national_content{
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        width: 100%;
+        gap: 10px;
+    }
+.calendrier_national_content table{
+    margin: auto;
+}
+
+.calendrier_national_content .table-format{
+    margin: auto;
+            margin-bottom: 20px;
+}
+    .classement_table_tableau .table-format td, 
+    .calendrier_national_content .table-format th {
+        font-size: 0.8em;
+        padding-left: 5px;
+        border: solid 1px black;
+    }
+
+    .calendrier_national_content .table-format td, 
+    .calendrier_national_content .table-format th{
+        width: 100px;
+        text-align: center;
+        font-size: 0.8em;
+        border: solid 1px black;
+    }
+
+    .calendrier_national_content .table-format th{
+        background-color: rgba(0, 110, 255, 0.473);
+    }
+                .calendrier_national_section .calendrier_national_content .table-format td{
+                    width: 200px;
+                }
+                .calendrier_national_section .calendrier_national_content .table-format td:nth-child(2) {
+                    width: 200px;
+                }
+    .calendrier_national_content .table-format td:nth-child(3){
+        width: 350px;
+    }
+
+    .calendrier_national_content .table-format td:nth-child(4){
+        width: 280px;
+    }
+    .calendrier_national_content .table-format td:nth-child(5){
+        width: 100px;
+    }
+
+    .classement_table_tableau .table-format td{
+        text-align: right;
+        padding-right: 5px;
+    }
+    .classement_table_tableau .table-format td:nth-child(2){
+        text-align: left;
+        padding-right: 5px;
+    }
+
+    .classement_table .classement_tableau_suite{
+        text-align: center;
+        padding: 2px;
+        background-color: var(--bouton-bleu);
+        border-radius: 8px;
+        font-size: .8em;
+        width: 80%;
+        margin: auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .classement_table .classement_tableau_suite:hover{
+        cursor: pointer;
+        background-color: var(--bouton-bleu-hover);
+    }
+
+    .classement_table .classement_tableau_suite a{
+        text-decoration: none;
+        color: white;
+    }
+
+
+
+    /* Classement css End */
+
+    .accueil_section .accueil, 
+    .partenaires_section .partenaires_titre, 
+    .evenements_section .evenements_titre, 
+    .localisation_section .localisation_titre, 
+    .presentation_section .presentation_titre,
+    .tarif_section .tarif_titre, 
+    .classement_section .classement_titre,
+    .calendrier_national_section .calendrier_national_titre{
+        grid-row-start: 1;
+        z-index:1;
+        position: relative;
+        margin: 0px auto;
+        top: 18px;
+        color: white;
+        width: 15vw;
+        padding-left: 5px;
+        height: 35px;
+        border-radius: 10px;
+        background-color: #695185;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.16);
+
+    }
+
+    .calendrier_national_section .calendrier_national_titre{
+        width: 25vw;
+    }
+
+    .accueil_section .content_accueil, 
+    .partenaires_section .partenaires_content, 
+    .evenements_section .evenements_content, 
+    .localisation_section .localisation_content, 
+    .presentation_section .presentation_content,
+    .tarif_section .tarif_content,
+    .classement_section .classement_content,
+    .calendrier_national_section .calendrier_national_content{
+        grid-row-start: 1;
+        background-color: white;
+        padding: 50px 15px 10px 15px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.16);
+        z-index: 0;
+    }
+
+    .evenements_section .calendrier_content{
+        padding: 15px;
+        padding-top: 30px;
+    }
+
+    .localisation_section .localisation_content{
+        margin-bottom: 4px;
+    }
+
+    .calendrier_national_section .calendrier_national_content{
+        margin-bottom: 10px;
+    }
+
+    .accueil_section .accueil h5,
+    .partenaires_section .partenaires_titre h5, 
+    .evenements_section .evenements_titre h5, 
+    .localisation_section .localisation_titre h5, 
+    .presentation_section .presentation_titre h5,
+    .tarif_section .tarif_titre h5,
+    .classement_section .classement_titre h5,
+    .calendrier_national_section .calendrier_national_titre h5{
+        font-size: 12px;
+        text-align: center;
+        padding: auto;
+        text-transform: uppercase;
+        padding-top: 10px;
+        font-weight: bold;
+    }
+
+    .content_accueil p,
+    .presentation_content p,
+    .tarif_content p {
+        text-align: justify;
+        padding-left: 30px;
+        padding-right: 30px;
+        font-weight: 300;
+    }
+
+    .content_accueil h6,
+    .presentation_content h6{
+        font-size: 1.3em;
+    }
+
+    .partenaires_section .evenements_section .evenements_content .evenement_img{
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        width: 50%;
+        height: auto;
+    }
+
+    .caroussel {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+    }
+
+    .caroussel img{
+        width: 40%;
+    }
+
+    .presentation_content .photo_club {
+        width: 50%;
+        margin: auto;
+        gap: 15px;
+    }
+
+    .presentation_content .photo_club img{
+        width: 60%;
+        transition: transform .2s;
+    }
+
+    .presentation_content .photo_club img:hover{
+       transform: scale(1.5);
+    }
+
+    #map {
+        height: 300px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+    }
+
+
+    /* ---------------- Maps icons set start -------------------------- */
+    .property {
+        align-items: center;
+        background-color: #FFFFFF;
+        border-radius: 50%;
+        color: #263238;
+        display: flex;
+        font-size: 14px;
+        gap: 15px;
+        height: 30px;
+        justify-content: center;
+        padding: 4px;
+        position: relative;
+        position: relative;
+        transition: all 0.3s ease-out;
+        width: 30px;
+        z-index: 2;
+    }
+    
+    .property::after {
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        border-top: 9px solid #FFFFFF;
+        content: "";
+        height: 0;
+        left: 50%;
+        position: absolute;
+        top: 95%;
+        transform: translate(-50%, 0);
+        transition: all 0.3s ease-out;
+        width: 0;
+        z-index: 1;
+    }
+    
+    .property .icon {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        color: #FFFFFF;
+    }
+    
+    .property .icon svg {
+        height: 20px;
+        width: auto;
+    }
+    
+    .property .details {
+        display: none;
+        flex-direction: column;
+        flex: 1;
+    }
+    
+    .property .address {
+        color: #9E9E9E;
+        font-size: 10px;
+        margin-bottom: 10px;
+        margin-top: 5px;
+    }
+    
+    .property .features {
+        align-items: flex-end;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+    
+    .property .features>div {
+        align-items: center;
+        background: #F5F5F5;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        display: flex;
+        font-size: 10px;
+        gap: 5px;
+        padding: 5px;
+    }
+    
+        /*
+     * Property styles in highlighted state.
+     */
+    .property.highlight {
+        background-color: #FFFFFF;
+        border-radius: 8px;
+        box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+        height: 80px;
+        padding: 55px 15px;
+        width: auto;
+    }
+    
+    .property.highlight::after {
+        border-top: 9px solid #FFFFFF;
+    }
+    
+    .property.highlight .details {
+        display: flex;
+    }
+    
+    .property.highlight .icon svg {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .property .bed {
+        color: #FFA000;
+    }
+    
+    .property .bath {
+        color: #03A9F4;
+    }
+    
+    .property .size {
+        color: #388E3C;
+    }
+    
+        /*
+     * House icon colors.
+     */
+    .property.highlight:has(.fa-house) .icon {
+        color: var(--house-color);
+    }
+    
+    .property:not(.highlight):has(.fa-house) {
+        background-color: var(--house-color);
+    }
+    
+    .property:not(.highlight):has(.fa-house)::after {
+        border-top: 9px solid var(--house-color);
+    }
+    
+        /*
+     * Building icon colors.
+     */
+    .property.highlight:has(.fa-building) .icon {
+        color: var(--building-color);
+    }
+    
+    .property:not(.highlight):has(.fa-building) {
+        background-color: var(--building-color);
+    }
+    
+    .property:not(.highlight):has(.fa-building)::after {
+        border-top: 9px solid var(--building-color);
+    }
+    
+        /*
+     * Warehouse icon colors.
+     */
+    .property.highlight:has(.fa-warehouse) .icon {
+        color: var(--warehouse-color);
+    }
+    
+    .property:not(.highlight):has(.fa-warehouse) {
+        background-color: var(--warehouse-color);
+    }
+    
+    .property:not(.highlight):has(.fa-warehouse)::after {
+        border-top: 9px solid var(--warehouse-color);
+    }
+    
+        /*
+     * Shop icon colors.
+     */
+    .property.highlight:has(.fa-shop) .icon {
+        color: var(--shop-color);
+    }
+    
+    .property:not(.highlight):has(.fa-shop) {
+        background-color: var(--shop-color);
+    }
+    
+    .property:not(.highlight):has(.fa-shop)::after {
+        border-top: 9px solid var(--shop-color);
+    }
+        
+    
+/* Tarif css start */
+
+.tarif_section .tarif_content a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    background-color: var(--bouton-bleu);
+    color: white;
+    border-radius: 10px;
+}
+
+/* Tarif css end */
+
+
+/* carambole section css start */
+.carambole_calendrier_mobile {
+    display: none;
+}
+.carambole_calendrier {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+iframe.carambole{
+    width: 1300px;
+    height: 800px;
+}
+
+}
+/* carambole section css end */
+
+/* Registration / Login page */
+

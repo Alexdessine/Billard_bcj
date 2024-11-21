@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/unispace-2');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+html, body{
+    height: 100%;
+}
+ul,
+li {
+    display: inline-block;
+    position: relative;
+}
+
+.footer{
+    position: relative;
+    bottom: 0;
+        background: linear-gradient(94deg, #ff65a3, #0e4daa);
+    max-width: 100vw;
+    width: 100%;
+    height: 250px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 50px;
+}
+
+.copyright{
+    height: 25px;
+    display: flex;
+    justify-content: center;
+        background: linear-gradient(94deg, #ff65a3, #0e4daa);
+    max-width: 100vw;
+    width: 100%;
+}
+
+.copyright p{
+    font-size: 0.8em;
+    text-align: center;
+    color: white;
+}
+
+.child{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.child img{
+    display: flex;
+    width: 50%;
+    height: auto;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+}
+
+.child2{
+    grid-column-start: 3;
+    grid-column-end: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: white;
+    padding-left: 20px;
+}
+
+.child2 h4{
+    padding-top: 25px;
+    font-family: 'Unispace';
+    font-weight: bold;
+}
+
+.child2 a{
+    text-decoration: none;
+    color: white;
+    text-align: left;
+}
+
+.child2 span{
+    padding: 0px 15px
+}
+
+.child3{
+    grid-column-start: 5;
+    grid-column-end: 7;
+    display: flex;
+        flex-direction: column;
+}
+
+.child3 h4 {
+    padding-top: 25px;
+    font-family: 'Unispace';
+    font-weight: bold;
+    color: white;
+}
+
+.child3 a {
+    text-decoration: none;
+    color: white;
+    text-align: left;
+}
+
+@media screen and (max-width: 950px){
+    .footer {
+            background: linear-gradient(94deg, #ff65a3, #0e4daa);
+            max-width: 100vw;
+            width: 100%;
+            height:200px;
+            display: flex;
+            gap: 0;
+            align-items: center;
+            justify-content:space-around;
+        }
+.child{
+    display: flex;
+    justify-content: center;
+    width: 25%;
+}
+        .child2{
+            gap: 0;
+            padding-left: 0;
+        }
+.child2 h4{
+    display: none;
+    font-size: .7em;
+}
+
+.child2 a i{
+    font-size: .7em;
+}
+.child2 span{
+    font-size: .7em;
+}
+
+
+                .child3 {
+                    display: none;
+                    gap: 0;
+                    padding-left: 0;
+                }
+        
+                .child3 h4 {
+                    font-size: .7em;
+                }
+        
+                .child3 a {
+                    font-size: .7em;
+                }
+                                .copyright p {
+                                    font-size: 0.5em;
+                                    text-align: center;
+                                    color: white;
+                                }
+}
+
+@media screen and (min-width: 951px) and (max-width: 1300px){
+
+.child{
+                margin: auto;
+                padding: 20px;
+}
+
+    .child .logo{
+        width: 100%;
+        padding-top: 0;
+    }
+    .child2{
+        margin: auto;
+        margin-top: 0;
+        width: 380px;
+        padding-left: 0px;
+    }
+
+    .child3{
+        margin: auto;
+        margin-top: 0;
+        text-align: center;
+    }
+    
+.child2 h4{
+    text-align: center;
+}
+
+.child2 a{
+    text-align: center;
+}
+    .child2 a i{
+        font-size: 1em;
+    }
+
+    .child2 span{
+        font-size: .8em;
+    }
+}
