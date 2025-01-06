@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/css/comite.css',
                 'resources/css/adminStyle.css', 
                 'resources/css/footer.css', 
+                'resources/css/mentions.css', 
                 'resources/css/nav_style.css', 
                 'resources/css/style.css', 
                 'resources/css/bootstrap.css', 

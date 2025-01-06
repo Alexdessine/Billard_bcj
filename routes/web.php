@@ -15,15 +15,16 @@ use App\Http\Controllers\PresentationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Compte\CompteController;
 use App\Http\Controllers\Forget\ForgetController;
+use App\Http\Controllers\Photos\PhotosController;
 use App\Http\Controllers\Tournois\TournoisController;
+use App\Http\Controllers\Comite\ComiteAdminController;
 use App\Http\Controllers\Licencies\LicenciesController;
 use App\Http\Controllers\Evenements\EvenementsController;
+use App\Http\Controllers\Gallerie\AdminGallerieController;
+use App\Http\Controllers\MentionController;
+use App\Http\Controllers\Participants\ParticipantsController;
 use App\Http\Controllers\National\NationalCalendrierController;
 use App\Http\Controllers\Regional\RegionalCalendrierController;
-use App\Http\Controllers\Comite\ComiteAdminController;
-use App\Http\Controllers\Gallerie\AdminGallerieController;
-use App\Http\Controllers\Participants\ParticipantsController;
-use App\Http\Controllers\Photos\PhotosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,7 @@ Route::get('/carambole', [CaramboleController::class, 'index'])->name('carambole
 Route::get('/snooker', [SnookerController::class, 'index'])->name('snooker');
 Route::get('/formation', [FormationController::class, 'index'])->name('formation');
 Route::get('/gallerie', [GallerieController::class, 'index'])->name('gallerie');
+Route::get('/mentions-legales', [MentionController::class, 'index'])->name('mentions-legales');
 
 
 route::middleware(['auth', 'block.mobile'])->group(function(){
@@ -123,6 +125,4 @@ route::middleware(['auth', 'block.mobile'])->group(function(){
 
 });
 
-Route::get('/test-block', function() {
-    return 'Accessible';
-})->middleware('block.mobile');
+

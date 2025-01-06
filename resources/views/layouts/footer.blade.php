@@ -18,7 +18,7 @@
     </div>
 </section>
 <section class="copyright">
-        <p>Réalisé par Alexandre Bourlier  &copy; 2023 - <?php echo date("Y")?></p>
+        <p>Réalisé par Alexandre Bourlier  &copy; 2023 - <?php echo date("Y")?> - <a href="{{ route('mentions-legales') }}">Mention légales</a></p>
 </section>
 </footer>
 </html>

@@ -9,26 +9,15 @@
         <script src="https://kit.fontawesome.com/a6212ffa8d.js" crossorigin="anonymous"></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-        <script type="text/javascript">
-        var _iub = _iub || [];
-        _iub.csConfiguration = {"siteId":3882243,"cookiePolicyId":41777646,"lang":"fr","storage":{"useSiteId":true}};
-        </script>
-        <script type="text/javascript" src="https://cs.iubenda.com/autoblocking/3882243.js"></script>
-        <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
-
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         @vite([
             'resources/css/app.css',
-            'resources/css/style.css',
             'resources/css/footer.css',
-            'resources/css/mentions.css',
             'resources/css/nav_style.css',
             'resources/css/bootstrap.css',
-            'resources/css/comite.css',
-            'resources/css/adminStyle.css',
-            'resources/js/maps.js'
+            'resources/css/mentions.css',
         ])
         <link href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
