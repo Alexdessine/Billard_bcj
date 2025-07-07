@@ -1,0 +1,641 @@
+:root {
+    --building-color: #0051ff;
+    --pool-color: #222222;
+    --carambole-color: #ff1e00;
+    --snooker-color: #003cff;
+    --bouton-bleu: #0370b7;
+    --bouton-bleu-hover: #024572;
+}
+
+html{
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(94deg, #ff65a3, #0e4daa);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    object-fit: fill;
+}
+
+
+body{
+    background-color: transparent;
+}
+
+.accordion-collapse.collapse.show {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.carambole{
+    background-color: #ff65a3;
+}
+
+.blackball{
+    background-color: #0e4daa;
+}
+
+.snooker{
+    background-color: green;
+}
+
+.americain{
+    background-color: red;
+}
+
+.club{
+    background-color: gray;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 100vh;
+    background: rgba(255, 255, 255, .2);
+    z-index: -100;
+    object-fit: fill;
+}
+
+.titre{
+    background-color: #0e4daa;
+    width: fit-content;
+    text-align: center;
+    padding: 6px;
+    border-radius: 5px;
+    position: relative;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-weight: 700;
+}
+
+.cadre{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: white;
+    max-width: 85vw;
+    margin: auto;
+    border-radius: 10px;
+    padding: 30px 30px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.16);
+    margin-bottom: 20px;
+}
+
+/* Page acceuil start */
+
+.accueil{
+    max-width: 90vw;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    grid-auto-rows: minmax(0, auto);
+}
+
+.home{
+    grid-column: 1 / 2;
+    grid-row: 1;
+    height: 50%;
+}
+
+.social_accueil{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.facebook{
+    height: 80%;
+}
+
+.favoriPost{
+    grid-column: 1/3;
+}
+
+.maps{
+    grid-row: 1;
+}
+
+/* ----------------- Mpas start large ----------------- */
+/**
+ * @license
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+/* Set the size of the div element that contains the map */
+#map{
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+}
+
+
+/* ---------------- Maps icons set start -------------------------- */
+.property{
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    color: #263238;
+    display: flex;
+    font-size: 14px;
+    gap: 15px;
+    height: 30px;
+    justify-content: center;
+    padding: 4px;
+    position: relative;
+    position: relative;
+    transition: all 0.3s ease-out;
+    width: 30px;
+}
+
+.property::after{
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 9px solid #FFFFFF;
+    content: "";
+    height: 0;
+    left: 50%;
+    position: absolute;
+    top: 95%;
+    transform: translate(-50%, 0);
+    transition: all 0.3s ease-out;
+    width: 0;
+    z-index: 1;
+}
+
+.property .icon{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: #FFFFFF;
+}
+
+.property .icon svg{
+    height: 20px;
+    width: auto;
+}
+
+.property .details{
+    display: none;
+    flex-direction: column;
+    flex: 1;
+}
+
+.property .address{
+    color: #9E9E9E;
+    font-size: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.property .features{
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.property .features>div{
+    align-items: center;
+    background: #F5F5F5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;
+    font-size: 10px;
+    gap: 5px;
+    padding: 5px;
+}
+
+/*
+ * Property styles in highlighted state.
+ */
+.property.highlight{
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+    height: 80px;
+    padding: 8px 15px;
+    width: auto;
+}
+
+.property.highlight::after {
+    border-top: 9px solid #FFFFFF;
+}
+
+.property.highlight .details {
+    display: flex;
+}
+
+.property.highlight .icon svg {
+    width: 50px;
+    height: 50px;
+}
+
+.features img {
+    width: 15px;
+}
+
+.property .bed {
+    color: var(--pool-color);
+}
+
+.property .bath {
+    color: var(--carambole-color);
+}
+
+.property .size {
+    color: var(--snooker-color);
+}
+
+/*
+ * House icon colors.
+ */
+.property.highlight:has(.fa-house) .icon {
+    color: var(--house-color);
+}
+
+.property:not(.highlight):has(.fa-house) {
+    background-color: var(--house-color);
+}
+
+.property:not(.highlight):has(.fa-house)::after {
+    border-top: 9px solid var(--house-color);
+}
+
+/*
+ * Building icon colors.
+ */
+.property.highlight:has(.fa-building) .icon {
+    color: var(--building-color);
+}
+
+.property:not(.highlight):has(.fa-building) {
+    background-color: var(--building-color);
+}
+
+.property:not(.highlight):has(.fa-building)::after {
+    border-top: 9px solid var(--building-color);
+}
+
+/*
+ * Warehouse icon colors.
+ */
+.property.highlight:has(.fa-warehouse) .icon {
+    color: var(--warehouse-color);
+}
+
+.property:not(.highlight):has(.fa-warehouse) {
+    background-color: var(--warehouse-color);
+}
+
+.property:not(.highlight):has(.fa-warehouse)::after {
+    border-top: 9px solid var(--warehouse-color);
+}
+
+/*
+ * Shop icon colors.
+ */
+.property.highlight:has(.fa-shop) .icon {
+    color: var(--shop-color);
+}
+
+.property:not(.highlight):has(.fa-shop) {
+    background-color: var(--shop-color);
+}
+
+.property:not(.highlight):has(.fa-shop)::after {
+    border-top: 9px solid var(--shop-color);
+}
+
+/* ---------------- Maps icons set end -------------------------- */
+
+/* Partenaire start */
+.partenaires-flex{
+    display: flex;
+    width: 100vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.partenaire-item
+{
+    flex: 0 1 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.partenaire-item img {
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: contain;
+}
+/* Partenaire end */
+/* Page acceuil end */
+
+
+/* page club start */
+
+.encadrement{
+    display: flex;
+    flex-direction: row;
+    /* background-color: green; */
+    width: 81vw;
+}
+
+.contenu {
+    /* background-color: green; */
+    display: flex;
+    margin: 15px 0;
+}
+
+.contenu .image{
+    /* background-color: red; */
+    width: 350px;
+    display: flex;
+    align-items:center;
+}
+
+.contenu-texte{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* page club end */
+
+.classement_table{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: fit-content;
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.classement_titre_table{
+    /* background-color: #0e4daa; */
+    border-bottom: 2px solid #0e4daa;
+    color: #0e4daa;
+    font-weight: 700;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.classement_table td{
+    border: solid 1px black;
+    padding: 3px;
+}
+
+.table-format i{
+    color: #0e4daa;
+    padding-right: 5px;
+}
+
+.table-format i:hover{
+    color: #092e65;
+}
+
+.classement-complet{
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.classement-complet a::before{
+    content: '🏆';
+    padding-right: 5px;
+}
+
+.donnees-source{
+    display: flex;
+    justify-content: flex-end;
+    font-size: small;
+    max-width: 100vw;
+    width: 100%;
+    text-align: right;
+}
+
+.accordion{
+    --bs-accordion-active-bg: none; 
+    --bs-accordion-btn-padding-x: none;
+    --bs-accordion-border-color: none;
+    --bs-accordion-btn-padding-y: none;
+    --bs-accordion-btn-icon: none;
+    --bs-accordion-btn-active-icon: none;
+    --bs-accordion-btn-focus-box-shadow: none;
+}
+
+.accordion-header button{
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #0e4daa;
+}
+
+.accordion-item{
+    max-width: 80vw;
+    width: 90vw;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #0e4daa !important;
+    border-radius: 10px !important;
+}
+
+.accordion-item:first-of-type {
+    border-top-left-radius: none !important;
+    border-top-right-radius: none !important;
+}
+
+.calendrier-items{
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #0e4daa;
+    text-align: left;
+    /* background-color: green; */
+}
+
+.calendrier-items.show{
+    display: block;
+}
+
+.accordion-body .sportEasy {
+    margin: auto;
+    width: 50%;
+    transform: translateX(50%);
+}
+
+.documents {
+    max-width: 100%;
+    width: 95%;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #0e4daa;
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #0e4daa;
+    transition: all ease-in-out 0.3s;
+}
+
+.documents span{
+    padding: 0 8px;
+    color: #0e4daa;
+    transition: all ease-in-out 0.3s;
+}
+
+.documents:hover{
+    background-color: #0e4daa;
+    color: white;
+    transition: all ease-in-out 0.3s;
+}
+
+.documents:hover span{
+    color: white;
+    transition: all ease-in-out 0.3s;
+}
+
+.img-gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    width: 100%;
+    height: auto;
+    margin: 30px auto;
+    justify-content: center;
+    grid-gap: 10px;
+}
+
+.img-gallery img{
+    border-radius: 10px;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.conditions h3{
+    font-size: 1.2em;
+    font-weight: 600;
+    padding: 25px 0;
+}
+
+.conditions h4{
+    font-weight: 600;
+    padding: 10px 0;
+}
+
+.conditions h5{
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.conditions p {
+    padding: 10px 0;
+}
+
+.conditions ul{
+    list-style-type: disc;
+}
+
+.conditions li{
+    padding: 0 10px;
+    margin: 0 50px;
+}
+
+.conditions .legal {
+    text-align: right;
+    font-size: 0.8em;
+    color: #9E9E9E;
+}
+
+@media only screen and (min-width:868px) and (max-width:1023px){
+    .accueil {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+@media only screen and (max-width:867px){
+    
+    .titre {
+        width: fit-content;
+        left: 0;
+        transform: translateX(10px);
+    }
+
+    .accueil{
+        display: flex;
+        flex-direction: column;
+    }
+    .accordion{
+        max-width: 100vw;
+    }
+
+    .accordion-body .sportEasy {
+        width: 100%;
+        transform: translateX(0);
+    }
+
+    .accordion-item{
+        max-width: 70vw;
+    }
+
+    .rang,
+    .points,
+    .nom{
+        font-size: 0.3em;
+    }
+
+
+
+    .partenaire-item {
+        flex: 21 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .partenaire-item img {
+        max-width: 50%;
+        max-height: 80px;
+        object-fit: contain;
+    }
+
+    /* page club start */
+
+    .encadrement {
+        width: auto;
+    }
+
+    .contenu {
+        flex-direction: column;
+    }
+
+    .contenu .image {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* page club end */
+}
