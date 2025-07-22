@@ -15,4 +15,6 @@ class CaramboleCalendrier extends Model
     ];
 
     protected $table = 'calendrier_carambole';
+    
+    public $timestamps = false;
 }

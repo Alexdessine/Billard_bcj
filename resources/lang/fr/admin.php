@@ -102,4 +102,8 @@ return [
         'filter_placeholder' => 'Filtre',
     ],
     'menu_titles'           => [],
+    'mimes'                 => 'Le champ :attribute doit être un fichier de type : :values.',
+    'attributes'            => [
+        'url' => 'fichier PDF',
+    ],
 ];

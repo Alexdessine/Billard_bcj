@@ -75,7 +75,7 @@ class CalendrierHelper
             HTML;
 
             // Si le type est "International" (insensible à la casse)
-            if (strtolower($type) === 'international') {
+            if (strtolower($type) === 'blackball_international') {
                 echo "<br><div class='accordion-body sportEasy'><a href='https://tih.bcj37.fr' target='_blank' class='sportEasy btn btn-success me-1 m-auto'>
                         🌍 Voir la compétition internationale
                     </a></div>";

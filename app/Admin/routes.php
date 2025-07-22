@@ -27,10 +27,15 @@ use App\Admin\Controllers\blackball\AdminCuescoreEquipesNationale;
 use App\Admin\Controllers\blackball\AdminCuescoreEquipesRegionale;
 
 use App\Admin\Controllers\americain\AdminAmericainClassement;
+use App\Admin\Controllers\americain\AdminAmericainCalendrier;
 use App\Admin\Controllers\americain\AdminAmericainCalendrierNational;
 use App\Admin\Controllers\americain\AdminAmericainCalendrierRegional;
 use App\Admin\Controllers\americain\AdminAmericainCalendrierDepartemental;
 use App\Admin\Controllers\americain\AdminAmericainCalendrierInternational;
+use App\Admin\Controllers\americain\liens_cuescore\AdminAmericainNationalLink;
+use App\Admin\Controllers\americain\liens_cuescore\AdminAmericainRegionalLink;
+use App\Admin\Controllers\americain\liens_cuescore\AdminAmericainInternationalLink;
+use App\Admin\Controllers\americain\liens_cuescore\AdminAmericainDepartementalLink;
 
 use App\Admin\Controllers\carambole\AdminCaramboleCalendrier;
 use App\Admin\Controllers\carambole\AdminCaramboleClassement;
@@ -38,12 +43,21 @@ use App\Admin\Controllers\carambole\AdminCaramboleCalendrierNational;
 use App\Admin\Controllers\carambole\AdminCaramboleCalendrierRegional;
 use App\Admin\Controllers\carambole\AdminCaramboleCalendrierDepartemental;
 use App\Admin\Controllers\carambole\AdminCaramboleCalendrierInternational;
+use App\Admin\Controllers\carambole\liens_cuescore\AdminCaramboleNationalLink;
+use App\Admin\Controllers\carambole\liens_cuescore\AdminCaramboleRegionalLink;
+use App\Admin\Controllers\carambole\liens_cuescore\AdminCaramboleInternationalLink;
+use App\Admin\Controllers\carambole\liens_cuescore\AdminCaramboleDepartementalLink;
 
 use App\Admin\Controllers\snooker\AdminSnookerClassement;
+use App\Admin\Controllers\snooker\AdminSnookerCalendrier;
 use App\Admin\Controllers\snooker\AdminSnookerCalendrierNational;
 use App\Admin\Controllers\snooker\AdminSnookerCalendrierRegional;
 use App\Admin\Controllers\snooker\AdminSnookerCalendrierDepartemental;
 use App\Admin\Controllers\snooker\AdminSnookerCalendrierInternational;
+use App\Admin\Controllers\snooker\liens_cuescore\AdminSnookerNationalLink;
+use App\Admin\Controllers\snooker\liens_cuescore\AdminSnookerRegionalLink;
+use App\Admin\Controllers\snooker\liens_cuescore\AdminSnookerInternationalLink;
+use App\Admin\Controllers\snooker\liens_cuescore\AdminSnookerDepartementalLink;
 
 use App\Admin\Controllers\AdminLicenciesController;
 use App\Admin\Controllers\AdminPartenairesController;
@@ -64,7 +78,9 @@ Route::group([
     $router->get('/carambole', 'AdminCaramboleController@index')->name('carambole.menu');
     $router->get('/carambole/calendrier', 'AdminCaramboleController@calendrier')->name('carambole.calendrier');
     $router->get('/snooker', 'AdminSnookerController@index')->name('snooker.menu');
+    $router->get('/snooker/calendrier', 'AdminSnookerController@calendrier')->name('snooker.calendrier');
     $router->get('/americain', 'AdminAmericainController@index')->name('americain.menu');
+    $router->get('/americain/calendrier', 'AdminAmericainController@calendrier')->name('americain.calendrier');
     $router->get('/systeme', 'SiteSettingDashboardController@index')->name('settings.menu');
     $router->get('/blackball/classement', 'AdminBlackballController@classement')->name('blackball.classement');
     $router->get('/blackball/calendrier', 'AdminBlackballController@calendrier')->name('blackball.calendrier');
@@ -75,6 +91,8 @@ Route::group([
 
     $router->resource('menus', MenuController::class);
     $router->resource('posts', AdminPostController::class);
+    
+    // Route pour le blackball admin
     $router->resource('calendrier_departementals', AdminCalendrierDepartemental::class);
     $router->resource('calendrier_nationals', AdminCalendrierNational::class);
     $router->resource('calendrier_regionals', AdminCalendrierRegional::class);
@@ -87,6 +105,8 @@ Route::group([
     $router->resource('cuescore-nationals', AdminCuescoreNational::class);
     $router->resource('cuescore-equipes-nationales', AdminCuescoreEquipesNationale::class);
     $router->resource('cuescore-equipes-regionales', AdminCuescoreEquipesRegionale::class);
+
+    // Route pour le carambole admin
     $router->resource('classement-caramboles', AdminCaramboleClassement::class);
     $router->resource('documents-carambole', AdminDocumentCarambole::class);
     $router->resource('carambole-calendriers', AdminCaramboleCalendrier::class);
@@ -94,24 +114,43 @@ Route::group([
     $router->resource('carambole-calendrier-nationals', AdminCaramboleCalendrierNational::class)->parameters(['carambole-calendrier-nationals' => 'caramboleCalNat']);
     $router->resource('carambole-calendrier-regionals', AdminCaramboleCalendrierRegional::class)->parameters(['carambole-calendrier-regionals' => 'caramboleCalReg']);
     $router->resource('carambole-calendrier-departementals', AdminCaramboleCalendrierDepartemental::class)->parameters(['carambole-calendrier-departementals' => 'caramboleCalDep']);
-    $router->resource('documents-snooker', AdminDocumentSnooker::class);
-    $router->resource('documents-americain', AdminDocumentAmericain::class);
+    $router->resource('carambole/liens_cuescore/national-links', AdminCaramboleNationalLink::class);
+    $router->resource('carambole/liens_cuescore/regional-links', AdminCaramboleRegionalLink::class);
+    $router->resource('carambole/liens_cuescore/international-links', AdminCaramboleInternationalLink::class);
+    $router->resource('carambole/liens_cuescore/departemental-links', AdminCaramboleDepartementalLink::class);
+    
+    
     $router->resource('indices', AdminIndex::class);
     $router->resource('contacts', ContactAdminController::class);
     $router->resource('site-settings', SiteSettingController::class);
     $router->resource('licencies', AdminLicenciesController::class);
     $router->resource('partenaires', AdminPartenairesController::class);
+    
+    // Route pour le snooker admin calendrier
+    $router->resource('documents-snooker', AdminDocumentSnooker::class);
     $router->resource('snooker-classements', AdminSnookerClassement::class);
+    $router->resource('snooker-calendriers', AdminSnookerCalendrier::class);
     $router->resource('snooker-calendrier-internationals', AdminSnookerCalendrierInternational::class)->parameters(['snooker-calendrier-internationals' => 'snookerCalIntl']);
     $router->resource('snooker-calendrier-nationals', AdminSnookerCalendrierNational::class)->parameters(['snooker-calendrier-nationals' => 'snookerCalNat']);
     $router->resource('snooker-calendrier-regionals', AdminSnookerCalendrierRegional::class)->parameters(['snooker-calendrier-regionals' => 'snookerCalReg']);
     $router->resource('snooker-calendrier-departementals', AdminSnookerCalendrierDepartemental::class)->parameters(['snooker-calendrier-departementals' => 'snookerCalDep']);
+    $router->resource('snooker/liens_cuescore/national-links', AdminSnookerNationalLink::class);
+    $router->resource('snooker/liens_cuescore/regional-links', AdminSnookerRegionalLink::class);
+    $router->resource('snooker/liens_cuescore/international-links', AdminSnookerInternationalLink::class);
+    $router->resource('snooker/liens_cuescore/departemental-links', AdminSnookerDepartementalLink::class);
+    
+    // Route pour l'américain admin calendrier
+    $router->resource('documents-americain', AdminDocumentAmericain::class);
     $router->resource('americain-classements', AdminAmericainClassement::class);
+    $router->resource('americain-calendriers', AdminAmericainCalendrier::class);
     $router->resource('americain-calendrier-internationals', AdminAmericainCalendrierInternational::class)->parameters(['americain-calendrier-internationals' => 'americainCalIntl']);
     $router->resource('americain-calendrier-nationals', AdminAmericainCalendrierNational::class)->parameters(['americain-calendrier-nationals' => 'americainCalNat']);
     $router->resource('americain-calendrier-regionals', AdminAmericainCalendrierRegional::class)->parameters(['americain-calendrier-regionals' => 'americainCalReg']);
     $router->resource('americain-calendrier-departementals', AdminAmericainCalendrierDepartemental::class)->parameters(['americain-calendrier-departementals' => 'americainCalDep']);
-    $router->resource('calendrier-snookers', AdminCalendrierSnooker::class);
+    $router->resource('americain/liens_cuescore/national-links', AdminAmericainNationalLink::class);
+    $router->resource('americain/liens_cuescore/regional-links', AdminAmericainRegionalLink::class);
+    $router->resource('americain/liens_cuescore/international-links', AdminAmericainInternationalLink::class);
+    $router->resource('americain/liens_cuescore/departemental-links', AdminAmericainDepartementalLink::class);
 
     $router->get('cuescore-nationals', [AdminCuescoreNational::class, 'index']);
     $router->get('cuescore-regionals', [AdminCuescoreRegional::class, 'index']);

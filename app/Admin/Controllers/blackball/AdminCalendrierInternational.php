@@ -49,8 +49,6 @@ class AdminCalendrierInternational extends AdminController
         $grid->column('date_fin', __('Date fin'));
         $grid->column('titre', __('Titre'));
         $grid->column('lieu', __('Lieu'));
-        // $grid->column('created_at', __('Created at'));
-        // $grid->column('updated_at', __('Updated at'));
 
         return $grid;
     }

@@ -49,6 +49,15 @@ class AdminCaramboleCalendrierInternational extends AdminController
         $grid->column('titre', __('Titre'));
         $grid->column('lieu', __('Lieu'));
         $grid->column('club', __('Club'));
+        $grid->column('actions', __('Liens'))->display(function () {
+            $linkExists = \App\Models\CaramboleInternationalLink::where('calendrier_id', $this->id)->exists();
+
+            if ($linkExists) {
+                return '<a href="/admin/carambole/liens_cuescore/international-links?calendrier_id=' . $this->id . '" class="btn btn-sm btn-primary">Voir les liens Cuescore</a>';
+            } else {
+                return '<a href="/admin/carambole/liens_cuescore/international-links/create?calendrier_id=' . $this->id . '" class="btn btn-sm btn-warning">Ajouter les liens Cuescore</a>';
+            }
+        });
 
         return $grid;
     }
@@ -62,6 +71,20 @@ class AdminCaramboleCalendrierInternational extends AdminController
     protected function detail($id)
     {
         $show = new Show(CaramboleCalendrierInternational::findOrFail($id));
+
+        $url = admin_url('carambole/calendrier');
+        $show->setResource(admin_url('carambole/calendrier')); // Optionnel
+
+        $show->panel()
+            ->tools(function ($tools) use ($url) {
+                $tools->prepend(<<<HTML
+                    <div style="margin-bottom: 10px;">
+                        <a href="{$url}" class="btn btn-primary" style="width: 250px; display: flex; justify-content: center;">
+                            ↩️ Retour au calendrier Carambole
+                        </a>
+                    </div>
+                HTML);
+            });
 
         $show->field('date_debut', __('Date debut'));
         $show->field('date_fin', __('Date fin'));
@@ -81,11 +104,28 @@ class AdminCaramboleCalendrierInternational extends AdminController
     {
         $form = new Form(new CaramboleCalendrierInternational());
 
-        $form->date('date_debut', __('Date debut'))->default(date('Y-m-d'));
-        $form->date('date_fin', __('Date fin'))->default(date('Y-m-d'));
-        $form->text('titre', __('Titre'));
-        $form->text('lieu', __('Lieu'));
+        $url = admin_url('carambole/calendrier');
+        $form->html('               
+            <a href="' . $url . '" class="btn btn-primary" style="margin: auto; margin-bottom: 10px; justify-content:center; display:flex; width:250px;">
+                ↩️ Retour au calendrier Carambole
+                </a>
+            '
+        );
+
+        $form->date('date_debut', __('Date debut'))->default(date('Y-m-d'))->required();
+        $form->date('date_fin', __('Date fin'))->default(date('Y-m-d'))->required();
+        $form->text('titre', __('Titre'))->required();
+        $form->text('lieu', __('Lieu'))->required();
         $form->text('club', __('Club'));
+
+        $form->html('
+                    <div>
+                        <p style="font-size:12px; margin-bottom:15px;">
+                            <span style="color:red;">*</span>
+                            Champs obligatoires
+                        </p>
+                '
+            );
 
         return $form;
     }
