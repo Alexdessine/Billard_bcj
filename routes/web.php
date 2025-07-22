@@ -85,3 +85,8 @@ Route::get('politique-confidentialite', function () {
 Route::get('/cuescore', function() {
     return view('cuescore');
 });
+
+// Route de test pour la langue
+Route::get('test-lang', function () {
+    return __('validation.mimes', ['attribute' => 'fichier', 'values' => 'pdf']);
+});

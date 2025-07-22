@@ -130,7 +130,7 @@ class AdminCalendrierNational extends AdminController
         $form->date('date_limite', __('Date Limite d\'inscription'))->default(date('Y-m-d'));
         $form->text('titre', __('Titre'))->required();
         $form->text('lieu', __('Lieu'))->required();
-        $form->text('club', __('Club'))->required();
+        $form->text('club', __('Club'));
 
         $form->html('
                     <div>

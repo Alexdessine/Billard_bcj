@@ -38,11 +38,18 @@ class AdminAmericainCalendrierDepartemental extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('date_debut', __('Date debut'));
         $grid->column('date_fin', __('Date fin'));
-        $grid->column('date_limite', __('Date limite'));
         $grid->column('titre', __('Titre'));
         $grid->column('lieu', __('Lieu'));
         $grid->column('club', __('Club'));
-        $grid->column('url', __('Url'));
+        $grid->column('actions', __('Liens'))->display(function () {
+            $linkExists = \App\Models\AmericainDepartementalLink::where('calendrier_id', $this->id)->exists();
+
+            if ($linkExists) {
+                return '<a href="/admin/americain/liens_cuescore/departemental-links?calendrier_id=' . $this->id . '" class="btn btn-sm btn-primary">Voir les liens Cuescore</a>';
+            } else {
+                return '<a href="/admin/americain/liens_cuescore/departemental-links/create?calendrier_id=' . $this->id . '" class="btn btn-sm btn-warning">Ajouter les liens Cuescore</a>';
+            }
+        });
 
         return $grid;
     }
@@ -74,7 +81,6 @@ class AdminAmericainCalendrierDepartemental extends AdminController
         $show->field('id', __('Id'));
         $show->field('date_debut', __('Date debut'));
         $show->field('date_fin', __('Date fin'));
-        $show->field('date_limite', __('Date limite'));
         $show->field('titre', __('Titre'));
         $show->field('lieu', __('Lieu'));
         $show->field('club', __('Club'));
@@ -100,14 +106,21 @@ class AdminAmericainCalendrierDepartemental extends AdminController
             '
         );
 
-        $form->date('date_debut', __('Date debut'))->default(date('Y-m-d'));
-        $form->date('date_fin', __('Date fin'))->default(date('Y-m-d'));
-        $form->date('date_limite', __('Date limite'))->default(date('Y-m-d'));
-        $form->text('titre', __('Titre'));
-        $form->text('lieu', __('Lieu'));
+        $form->date('date_debut', __('Date debut'))->default(date('Y-m-d'))->required();
+        $form->date('date_fin', __('Date fin'))->default(date('Y-m-d'))->required();
+        $form->text('titre', __('Titre'))->required();
+        $form->text('lieu', __('Lieu'))->required();
         $form->text('club', __('Club'));
-        $form->url('url', __('Url'));
 
+
+        $form->html('
+                    <div>
+                        <p style="font-size:12px; margin-bottom:15px;">
+                            <span style="color:red;">*</span>
+                            Champs obligatoires
+                        </p>
+                '
+            );
         return $form;
     }
 }

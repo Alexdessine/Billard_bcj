@@ -43,6 +43,23 @@
 </style>
 
 <div class="admin-grid">
+
+
+    <div class="admin-card snooker-section">
+        <a href="{{ admin_url('snooker-classements') }}">
+            <strong>Liens classements</strong><br>
+            <i class="fa-solid fa-ranking-star"></i>
+        </a>
+    </div>
+
+    <div class="admin-card snooker-section">
+        <a href="{{ admin_url('snooker/calendrier') }}">
+            <strong>Calendrier</strong><br>
+            <i class="fa-solid fa-calendar-days"></i>
+        </a>
+    </div>
+
+
     <div class="admin-card snooker-section">
         <a href="{{ admin_url('documents-snooker') }}">
             <strong>Documents</strong><br>
@@ -50,10 +67,4 @@
         </a>
     </div>
 
-    <div class="admin-card snooker-section">
-        <a href="{{ admin_url('snooker-classements') }}">
-            <strong>Liens classements</strong><br>
-            <i class="fa-solid fa-link"></i>
-        </a>
-    </div>
 </div>

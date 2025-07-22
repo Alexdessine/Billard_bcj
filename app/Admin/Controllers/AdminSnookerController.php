@@ -19,4 +19,12 @@ class AdminSnookerController extends Controller
             ->row(view('admin.snooker.dashboard'));
     }
 
+    public function calendrier(Content $content)
+    {
+        return $content
+            ->title('Tableau de bord')
+            ->description('Bienvenue dans l\'administration')
+            ->row(view('admin.snooker.calendrier'));
+    }
+
 }

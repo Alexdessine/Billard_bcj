@@ -13,6 +13,9 @@ return [
     'alpha_num'            => 'Le champ :attribute doit contenir uniquement des chiffres et des lettres.',
     'array'                => 'Le champ :attribute doit être un tableau.',
     'ascii'                => 'Le champ :attribute ne doit contenir que des caractères alphanumériques et des symboles codés sur un octet.',
+    'attributes'           => [
+        'url' => 'fichier',
+    ],
     'before'               => 'Le champ :attribute doit être une date antérieure au :date.',
     'before_or_equal'      => 'Le champ :attribute doit être une date antérieure ou égale au :date.',
     'between'              => [
@@ -25,6 +28,11 @@ return [
     'can'                  => 'Le champ :attribute contient une valeur non autorisée.',
     'confirmed'            => 'Le champ de confirmation :attribute ne correspond pas.',
     'current_password'     => 'Le mot de passe est incorrect.',
+    'custom'               => [
+        'url' => [
+            'mimes' => 'Le champ fichier doit être un fichier PDF.',
+        ],
+    ],
     'date'                 => 'Le champ :attribute n\'est pas une date valide.',
     'date_equals'          => 'Le champ :attribute doit être une date égale à :date.',
     'date_format'          => 'Le champ :attribute ne correspond pas au format :format.',

@@ -100,13 +100,22 @@ class AdminCalendrierDepartemental extends AdminController
             '
         );
 
-        $form->date('date_debut', __('Date debut'))->default(date('Y-m-d'));
-        $form->date('date_fin', __('Date fin'))->default(date('Y-m-d'));
+        $form->date('date_debut', __('Date debut'))->default(date('Y-m-d'))->required();
+        $form->date('date_fin', __('Date fin'))->default(date('Y-m-d'))->required();
         $form->date('date_limite', __('Date limite'))->default(date('Y-m-d'));
-        $form->text('titre', __('Titre'));
-        $form->text('lieu', __('Lieu'));
-        $form->text('club', __('Club'));
+        $form->text('titre', __('Titre'))->required();
+        $form->text('lieu', __('Lieu'))->required();
+        $form->text('club', __('Club'))->required();
         $form->url('url', __('Url'));
+
+        $form->html('
+                    <div>
+                        <p style="font-size:12px; margin-bottom:15px;">
+                            <span style="color:red;">*</span>
+                            Champs obligatoires
+                        </p>
+                '
+            );
 
         return $form;
     }

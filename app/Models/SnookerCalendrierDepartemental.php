@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class SnookerCalendrierDepartemental extends Model
 {
     protected $table = 'snooker_calendrier_departemental';
+
+    public $timestamps = false;
 }

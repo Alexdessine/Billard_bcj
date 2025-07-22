@@ -10,7 +10,7 @@
         <div class="accordion">
             <x-cadre>
                 <div class="accordion" id="accordionInternational">
-                    {!!  App\Helpers\CalendrierHelper::afficher($calendrier_international, 'International') !!}
+                    {!!  App\Helpers\CalendrierHelper::afficher($calendrier_international, 'blackball_international') !!}
                 </div>
             </x-cadre>
         </div>

@@ -27,10 +27,10 @@ class AdminAmericainClassement extends AdminController
         $grid = new Grid(new AmericainClassement());
 
         $grid->header(function () {
-            $url = admin_url('americain/classement');
+            $url = admin_url('americain');
             return <<<HTML
                 <a href="{$url}" class="btn btn-primary" style="margin: auto; margin-bottom: 10px; justify-content:center; display:flex; width:250px;">
-                ↩️ Retour au classement Américain
+                ↩️ Retour au tableau de bord américain
                 </a>
             HTML;
         });

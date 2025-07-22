@@ -86,7 +86,6 @@
         <a href="{{ admin_url('carambole-calendriers') }}">
             <strong>Calendrier PDF</strong><br>
             <i class="fa-solid fa-calendar-days"></i>
-            <small>Ce calendrier prévaut sur les autres</small>
         </a>
     </div>
 </div>

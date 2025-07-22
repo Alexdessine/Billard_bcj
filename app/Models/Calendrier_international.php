@@ -14,4 +14,6 @@ class Calendrier_international extends Model
         'date_fin',
         'lieu',
     ];
+
+    public $timestamps = false;
 }

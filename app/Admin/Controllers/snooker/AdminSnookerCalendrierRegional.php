@@ -6,6 +6,7 @@ use OpenAdmin\Admin\Controllers\AdminController;
 use OpenAdmin\Admin\Form;
 use OpenAdmin\Admin\Grid;
 use OpenAdmin\Admin\Show;
+use OpenAdmin\Admin\Layout\Content;
 use \App\Models\SnookerCalendrierRegional;
 
 class AdminSnookerCalendrierRegional extends AdminController
@@ -17,6 +18,14 @@ class AdminSnookerCalendrierRegional extends AdminController
      */
     protected $title = 'Calendrier régional - Discipline snooker';
 
+    public function index(Content $content)
+    {
+        return $content
+            ->title($this->title)
+            ->description('Liste des liens vers le calendrier départemental')
+            ->body($this->grid());
+    }
+
     /**
      * Make a grid builder.
      *
@@ -26,14 +35,30 @@ class AdminSnookerCalendrierRegional extends AdminController
     {
         $grid = new Grid(new SnookerCalendrierRegional());
 
+        $grid->header(function () {
+            $url = admin_url('snooker/calendrier');
+            return <<<HTML
+                <a href="{$url}" class="btn btn-primary" style="margin: auto; margin-bottom: 10px; justify-content:center; display:flex; width:250px;">
+                ↩️ Retour au calendrier Snooker
+                </a>
+            HTML;
+        });
+
         $grid->column('id', __('Id'));
         $grid->column('date_debut', __('Date debut'));
         $grid->column('date_fin', __('Date fin'));
-        $grid->column('date_limite', __('Date limite'));
         $grid->column('titre', __('Titre'));
         $grid->column('lieu', __('Lieu'));
         $grid->column('club', __('Club'));
-        $grid->column('url', __('Url'));
+        $grid->column('actions', __('Liens'))->display(function () {
+            $linkExists = \App\Models\SnookerRegionalLink::where('calendrier_id', $this->id)->exists();
+
+            if ($linkExists) {
+                return '<a href="/admin/snooker/liens_cuescore/regional-links?calendrier_id=' . $this->id . '" class="btn btn-sm btn-primary">Voir les liens Cuescore</a>';
+            } else {
+                return '<a href="/admin/snooker/liens_cuescore/regional-links/create?calendrier_id=' . $this->id . '" class="btn btn-sm btn-warning">Ajouter les liens Cuescore</a>';
+            }
+        });
 
         return $grid;
     }
@@ -48,14 +73,26 @@ class AdminSnookerCalendrierRegional extends AdminController
     {
         $show = new Show(SnookerCalendrierRegional::findOrFail($id));
 
+        $url = admin_url('snooker/calendrier');
+        $show->setResource(admin_url('snooker/calendrier')); // Optionnel
+
+        $show->panel()
+            ->tools(function ($tools) use ($url) {
+                $tools->prepend(<<<HTML
+                    <div style="margin-bottom: 10px;">
+                        <a href="{$url}" class="btn btn-primary" style="width: 250px; display: flex; justify-content: center;">
+                            ↩️ Retour au calendrier Snooker
+                        </a>
+                    </div>
+                HTML);
+            });
+
         $show->field('id', __('Id'));
         $show->field('date_debut', __('Date debut'));
         $show->field('date_fin', __('Date fin'));
-        $show->field('date_limite', __('Date limite'));
         $show->field('titre', __('Titre'));
         $show->field('lieu', __('Lieu'));
         $show->field('club', __('Club'));
-        $show->field('url', __('Url'));
 
         return $show;
     }
@@ -69,13 +106,28 @@ class AdminSnookerCalendrierRegional extends AdminController
     {
         $form = new Form(new SnookerCalendrierRegional());
 
-        $form->date('date_debut', __('Date debut'))->default(date('Y-m-d'));
-        $form->date('date_fin', __('Date fin'))->default(date('Y-m-d'));
-        $form->date('date_limite', __('Date limite'))->default(date('Y-m-d'));
-        $form->text('titre', __('Titre'));
-        $form->text('lieu', __('Lieu'));
+        $url = admin_url('snooker/calendrier');
+        $form->html('               
+            <a href="' . $url . '" class="btn btn-primary" style="margin: auto; margin-bottom: 10px; justify-content:center; display:flex; width:250px;">
+                ↩️ Retour au calendrier Snooker
+                </a>
+            '
+        );
+
+        $form->date('date_debut', __('Date debut'))->default(date('Y-m-d'))->required();
+        $form->date('date_fin', __('Date fin'))->default(date('Y-m-d'))->required();
+        $form->text('titre', __('Titre'))->required();
+        $form->text('lieu', __('Lieu'))->required();
         $form->text('club', __('Club'));
-        $form->url('url', __('Url'));
+
+        $form->html('
+                    <div>
+                        <p style="font-size:12px; margin-bottom:15px;">
+                            <span style="color:red;">*</span>
+                            Champs obligatoires
+                        </p>
+                '
+            );
 
         return $form;
     }

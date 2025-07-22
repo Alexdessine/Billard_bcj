@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class AmericainCalendrierInternational extends Model
 {
     protected $table = 'americain_calendrier_international';
+
+    public $timestamps = false;
 }
