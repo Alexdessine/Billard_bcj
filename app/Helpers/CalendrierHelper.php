@@ -2,8 +2,10 @@
 
 namespace App\Helpers;
 
-use App\Models\CaramboleCalendrier;
 use DateTime;
+use App\Models\SnookerCalendrier;
+use App\Models\AmericainCalendrier;
+use App\Models\CaramboleCalendrier;
 
 class CalendrierHelper
 {
@@ -114,8 +116,28 @@ class CalendrierHelper
         }
     }
 
-    public static function calendrierCarambole($discipline)
+    public static function calendrierParDiscipline(string $discipline)
     {
-        return CaramboleCalendrier::where('discipline', $discipline)->get();
+        $modelMap = [
+            'carambole' => CaramboleCalendrier::class,
+            'americain' => AmericainCalendrier::class,
+            'snooker' => SnookerCalendrier::class,
+        ];
+
+        if (!isset($modelMap[$discipline])) {
+            return collect(); //Retourne une collection vide si la discipline n'existe pas 
+        }
+
+        return $modelMap[$discipline]::where('discipline', self::disciplineCode($discipline))->get();
+    }
+
+    public static function disciplineCode(string $discipline): int
+    {
+        return match ($discipline) {
+            'carambole' => 2,
+            'snooker' => 3,
+            'americain' => 4,
+            default => 0,
+        };
     }
 }

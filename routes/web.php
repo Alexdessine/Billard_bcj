@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
@@ -43,7 +44,7 @@ Route::get('/carambole/document', function () {
     return view('carambole.document');
 })->name('carambole.document');
 // Route::get('/carambole/galerie', [CaramboleController::class, 'galerie'])->name('carambole.gallerie');
-Route::get('/carambole/classement', [CaramboleController::class, 'classement'])->name('carambole.classement');
+Route::get('/carambole/classement', [CaramboleController::class, 'classementMultiple'])->name('carambole.classement');
 Route::get('/carambole/classement/pdf', [CaramboleController::class, 'classementPdf'])->name('carambole.classement-pdf');
 
 Route::get('/carambole', [CaramboleController::class, 'index'])->name('carambole');
@@ -90,3 +91,10 @@ Route::get('/cuescore', function() {
 Route::get('test-lang', function () {
     return __('validation.mimes', ['attribute' => 'fichier', 'values' => 'pdf']);
 });
+
+Route::get('/files/{path}', function (string $path) {
+    abort_unless(Storage::disk('public')->exists($path), 404);
+    return response()->file(Storage::disk('public')->path($path), [
+        'Cache-Control' => 'public, max-age=86400',
+    ]);
+})->where('path', '.*')->name('files.public');

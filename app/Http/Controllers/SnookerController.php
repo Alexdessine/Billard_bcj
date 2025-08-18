@@ -6,11 +6,16 @@ use App\Models\Post;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\CalendrierSnooker;
+use App\Models\SnookerCalendrier;
 use App\Models\SnookerClassement;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use App\Models\SnookerCalendrierNational;
+use App\Models\SnookerCalendrierRegional;
+use App\Models\SnookerCalendrierDepartemental;
+use App\Models\SnookerCalendrierInternational;
 
 class SnookerController extends Controller
 {
@@ -31,11 +36,19 @@ class SnookerController extends Controller
 
     public function calendrier()
     {
-        // Récupérer le calendrier snooker
-        $calendrier_snooker = CalendrierSnooker::orderBy('id', 'asc')->take(8)->get();
+        // Récupérer le calendrier national et regional
+        $snooker_national = SnookerCalendrierNational::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $snooker_regional = SnookerCalendrierRegional::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $snooker_international = SnookerCalendrierInternational::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $snooker_departemental = SnookerCalendrierDepartemental::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $snooker_calendrier = SnookerCalendrier::orderBy('id', 'desc')->take(8)->get()->reverse();
 
         return view('snooker.calendrier', compact(
-            'calendrier_snooker'
+            'snooker_national',
+            'snooker_regional',
+            'snooker_international',
+            'snooker_departemental',
+            'snooker_calendrier'
         ));
     }
 

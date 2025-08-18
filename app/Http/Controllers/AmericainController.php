@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Models\AmericainCalendrier;
 use App\Models\AmericainClassement;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
@@ -35,18 +36,18 @@ class AmericainController extends Controller
     public function calendrier()
     {
         // Récupérer le calendrier national et regional
-        $americain_national = AmericainCalendrierNational::orderBy('id', 'asc')->take(8)->get();
-        $americain_regional = AmericainCalendrierRegional::orderBy('id', 'asc')->take(8)->get();
-        $americain_international = AmericainCalendrierInternational::orderBy('id', 'asc')->take(8)->get();
-        $americain_departemental = AmericainCalendrierDepartemental::orderBy('id', 'asc')->take(8)->get();
-        // $americain_calendrier = AmericainCalendrier::orderBy('id', 'desc')->take(8)->get();
+        $americain_national = AmericainCalendrierNational::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $americain_regional = AmericainCalendrierRegional::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $americain_international = AmericainCalendrierInternational::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $americain_departemental = AmericainCalendrierDepartemental::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $americain_calendrier = AmericainCalendrier::orderBy('id', 'desc')->take(8)->get()->reverse();
 
         return view('americain.calendrier', compact(
             'americain_national',
             'americain_regional',
             'americain_international',
-            'americain_departemental'
-            // 'americain_calendrier'
+            'americain_departemental',
+            'americain_calendrier'
         ));
     }
 

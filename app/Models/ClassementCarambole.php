@@ -9,11 +9,13 @@ class ClassementCarambole extends Model
 {
     use HasFactory;
 
+
+    protected $table = 'classement_carambole';
     protected $fillable = [
         'title',
         'file',
+        'discipline'
     ];
 
     public $timestamps = false;
-    protected $table = 'classement_carambole';
 }
