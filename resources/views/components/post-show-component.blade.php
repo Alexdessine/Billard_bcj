@@ -17,14 +17,14 @@
             $disciplineName = $disciplines[$post->discipline] ?? null;
         @endphp
                 {{-- Début du post --}}
-                <div class="flex flex-col lg:flex-row lg:items-center pb-10 md:pb-16">
+                <div class="flex flex-col lg:flex-row pb-10 md:pb-16">
                     <div class="lg:w-5/12">
                         @if ($post->video)
                             <div class="aspect-w-10 aspect-h-9">
                                 <iframe width="100%" height="315" src="{{ $post->video }}" frameborder="0" allowfullscreen></iframe>
                             </div>
                         @else
-                            <img class="w-full max-h-none object-cover lg:max-h-none lg:h-full" src="{{asset('uploads/' . $post->thumbnail) }}">
+                            <img class="w-full h-auto lg:max-h-none lg:h-full" src="{{asset('uploads/' . $post->thumbnail) }}">
                         @endif
                         {{-- <img class="w-full max-h-72 object-cover lg:max-h-none lg:h-full" src="{{ $post->thumbnail }}"> --}}
                     </div>

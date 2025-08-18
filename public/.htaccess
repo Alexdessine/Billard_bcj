@@ -27,3 +27,8 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+<FilesMatch "\.(?i:pdf)$">
+  Header set Content-Type application/pdf
+  Require all granted
+</FilesMatch>

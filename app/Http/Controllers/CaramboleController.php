@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Calendrier_national;
 use App\Models\Calendrier_regional;
 use App\Models\CaramboleCalendrier;
+use App\Models\ClassementCarambole;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use App\Models\CaramboleCalendrierNational;
@@ -39,11 +40,11 @@ class CaramboleController extends Controller
     public function calendrier()
     {
         // Récupérer le calendrier national et regional
-        $carambole_national = CaramboleCalendrierNational::orderBy('id', 'asc')->take(8)->get();
-        $carambole_regional = CaramboleCalendrierRegional::orderBy('id', 'asc')->take(8)->get();
-        $carambole_international = CaramboleCalendrierInternational::orderBy('id', 'asc')->take(8)->get();
-        $carambole_departemental = CaramboleCalendrierDepartemental::orderBy('id', 'asc')->take(8)->get();
-        $carambole_calendrier = CaramboleCalendrier::orderBy('id', 'desc')->take(8)->get();
+        $carambole_national = CaramboleCalendrierNational::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $carambole_regional = CaramboleCalendrierRegional::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $carambole_international = CaramboleCalendrierInternational::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $carambole_departemental = CaramboleCalendrierDepartemental::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $carambole_calendrier = CaramboleCalendrier::orderBy('id', 'desc')->take(8)->get()->reverse();
 
         return view('carambole.calendrier', compact(
             'carambole_national',
@@ -96,5 +97,25 @@ class CaramboleController extends Controller
         return response($mpdf->Output('', 'S'), 200)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Disposition', 'inline; filename="classement.pdf"');
+    }
+
+    public function classementMultiple()
+    {
+        // Récupère les entrées depuis la DB (filtre si besoin par discipline)
+        $rows = ClassementCarambole::query()
+            // ->where('discipline', 'carambole')   // ajuste/retire ce filtre selon ton usage
+            ->orderByDesc('id')          // ou ->orderBy('title')
+            ->get(['title', 'file']);
+
+        // On mappe vers la même structure que ton ancienne vue attendait
+        $fichiers = $rows->map(function ($row) {
+            return [
+                'nom' => $row->title,
+                // Génère l’URL publique vers /storage/...
+                'url' => Storage::url($row->file), // ex: "ftp/3 bandes.pdf" -> "/storage/ftp/3 bandes.pdf"
+            ];
+        });
+
+        return view('carambole.classement', compact('fichiers'));
     }
 }

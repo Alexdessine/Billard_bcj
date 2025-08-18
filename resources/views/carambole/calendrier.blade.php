@@ -1,32 +1,17 @@
-{{-- <x-layout> --}}
-    {{-- Calque blanc transparent --}}
-    {{-- <div class="overlay"></div> --}}
-    {{-- <section class="body-content"> --}}
-        {{-- <x-sous-menu discipline="carambole"></x-sous-menu> --}}
-    {{-- </section> --}}
-    {{-- <section> --}}
-        {{-- <x-title> --}}
-            {{-- Calendriers officiels --}}
-        {{-- </x-title> --}}
-        {{-- <x-cadre> --}}
-            {{-- <x-carambole_calendrier discipline="2"/> --}}
-        {{-- </x-cadre> --}}
-    {{-- </section> --}}
-{{-- </x-layout> --}}
 <x-layout>
     {{-- Calque blanc transparent --}}
     <div class="overlay"></div>
     <section class="body-content">
-       <x-sous-menu discipline="blackball"></x-sous-menu>
+       <x-sous-menu discipline="carambole"></x-sous-menu>
     </section>
     {{-- Pour les tournois internationaux (ex: THD) --}}
     @if($carambole_calendrier->isNotEmpty())
             <section>
         <x-title>
-            Calendriers officiels
+            Calendriers PDF
         </x-title>
         <x-cadre>
-            <x-carambole_calendrier discipline="2"/>
+            <x-calendrier-pdf discipline="carambole"/>
         </x-cadre>
     </section>
     @endif
