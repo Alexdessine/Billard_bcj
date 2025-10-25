@@ -241,7 +241,7 @@ JS);
             $form->display('calendrier.titre', 'Tournoi');
         }
 
-        $form->number('calendrier_id', __('Calendrier id'));
+        $form->number('calendrier_id', __('Calendrier id'))->default(request('calendrier_id'));
         $form->text('top_ligue', __('Top ligue'));
         $form->text('mixte', __('Mixte'));
         $form->text('feminin', __('Feminin'));

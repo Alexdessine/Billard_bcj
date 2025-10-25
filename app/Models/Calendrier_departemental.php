@@ -10,4 +10,8 @@ class Calendrier_departemental extends Model
 
     public $timestamps = false;
 
+    public function links(){
+        return $this->hasOne(DepartementalLink::class, 'calendrier_id');
+    }
+
 }
