@@ -1,23 +1,13 @@
 <?php
 
-/**
- * Open-admin - admin builder based on Laravel.
- * @author z-song <https://github.com/z-song>
- *
- * Bootstraper for Admin.
- *
- * Here you can remove builtin form field:
- * OpenAdmin\Admin\Form::forget(['map', 'editor']);
- *
- * Or extend custom form field:
- * OpenAdmin\Admin\Form::extend('php', PHPEditor::class);
- *
- * Or require js and css assets:
- * Admin::css('/packages/prettydocs/css/styles.css');
- * Admin::js('/packages/prettydocs/js/main.js');
- *
- */
+use OpenAdmin\Admin\Admin;
+use OpenAdmin\Admin\Form;
+use App\Admin\Extensions\Form\Ck5Decoupled;
 
-OpenAdmin\Admin\Form::forget(['editor']);
+Form::extend('ck5', Ck5Decoupled::class);
 
+// Quill (CSS + JS)
+Admin::css('https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css');
+Admin::js('https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js');
 
+// (Optionnel) si tu veux Quill v2, remplace 1.3.7 par @2.x et adapte si besoin.

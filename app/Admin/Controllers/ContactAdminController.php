@@ -61,7 +61,7 @@ class ContactAdminController extends AdminController
     {
         $form = new Form(new Contact());
 
-        $form->textarea('message', __('Message'))->required();
+        $form->ck5('message', __('Message'))->rows(700)->required();
         $form->email('mail', __('Mail'))->required();
         $form->text('telephone', 'Téléphone')
             ->rules(['required', 'regex:/^0[1-9]( ?\d{2}){4}$/'])

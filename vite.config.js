@@ -5,12 +5,13 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.css',
-                'resources/css/nav.css',
-                'resources/css/style.css',
-                'resources/css/footer.css',
-                'resources/js/app.js',
-                'resources/js/maps.js',
+                'resources/css/app.css', 
+                'resources/css/style.css', 
+                'resources/js/app.js', 
+                'resources/css/footer.css', 
+                'resources/css/nav.css', 
+                'resources/js/bootstrap.js', 
+                'resources/js/maps.js'
             ],
             refresh: true,
         }),

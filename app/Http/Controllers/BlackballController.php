@@ -28,7 +28,7 @@ class BlackballController extends Controller
 
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(8);
+        $posts = Post::orderBy('id', 'desc')->paginate(20);
         return view('blackball.index', [
             'posts' => $posts,
         ]);
@@ -44,10 +44,10 @@ class BlackballController extends Controller
     public function calendrier()
     {
         // Récupérer le calendrier national et regional
-        $calendrier_national = Calendrier_national::orderBy('id', 'desc')->take(9)->get()->reverse();
-        $calendrier_regional = Calendrier_regional::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $calendrier_international = Calendrier_international::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $calendrier_departemental = Calendrier_departemental::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $calendrier_national = Calendrier_national::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $calendrier_regional = Calendrier_regional::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $calendrier_international = Calendrier_international::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $calendrier_departemental = Calendrier_departemental::orderBy('id', 'desc')->take(15)->get()->reverse();
 
         return view('blackball.calendrier', compact(
             'calendrier_national',
@@ -226,13 +226,18 @@ class BlackballController extends Controller
 
         }
 
+        $labelNational = CuescoreNational::labels();
+        // $labelRegional = CuescoreRegional::labels();
+        
         // On passe toutes les données à la vue
         return view('blackball.classement', compact(
             'nationalData', 
             'regionalData', 
             'classement',
             'startYear', 
-            'endYear'
+            'endYear',
+            'labelNational'
+            // 'labelRegional'
         ));
     }
 

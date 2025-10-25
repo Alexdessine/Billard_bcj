@@ -12,7 +12,7 @@
             @if(!empty($participants))
                 <div class="classement_table">
                     <div class="classement_titre_table">
-                        <h6>Classement {{ ucfirst($categorie) }}</h6>
+                        <h6>Classement {{ $labelNational[$categorie] ?? ucfirst($categorie) }}</h6>
                     </div>
                     <div class="classement_table_tableau">
                         <table class="table-format">

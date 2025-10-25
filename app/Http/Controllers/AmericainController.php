@@ -22,7 +22,7 @@ class AmericainController extends Controller
     public function index()
     {
         return view('americain.index', [
-            'posts' => Post::paginate(5),
+            'posts' => Post::paginate(20),
         ]);
     }
 
@@ -36,11 +36,11 @@ class AmericainController extends Controller
     public function calendrier()
     {
         // Récupérer le calendrier national et regional
-        $americain_national = AmericainCalendrierNational::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $americain_regional = AmericainCalendrierRegional::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $americain_international = AmericainCalendrierInternational::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $americain_departemental = AmericainCalendrierDepartemental::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $americain_calendrier = AmericainCalendrier::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $americain_national = AmericainCalendrierNational::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $americain_regional = AmericainCalendrierRegional::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $americain_international = AmericainCalendrierInternational::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $americain_departemental = AmericainCalendrierDepartemental::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $americain_calendrier = AmericainCalendrier::orderBy('id', 'desc')->take(15)->get()->reverse();
 
         return view('americain.calendrier', compact(
             'americain_national',

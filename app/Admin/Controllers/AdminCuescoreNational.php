@@ -45,15 +45,15 @@ class AdminCuescoreNational extends AdminController
         });
 
 
-        $grid->column('Blackball Master', __('Blackball Master'));
+        $grid->column('blackball_master', __('Blackball Master'));
         $grid->column('mixte', __('Mixte'));
-        $grid->column('mixte tableau A', __('Mixte tableau A'));
-        $grid->column('mixte tableau B', __('Mixte tableau B'));
+        $grid->column('mixte_tableau_a', __('Mixte tableau A'));
+        $grid->column('mixte_tableau_b', __('Mixte tableau B'));
         $grid->column('feminin', __('Feminin'));
-        $grid->column('juniors (U18)', __('Juniors (U18)'));
-        $grid->column('espoirs (U23)', __('Espoirs (U23)'));
+        $grid->column('juniors_u18', __('Juniors (U18)'));
+        $grid->column('espoirs_23', __('Espoirs (U23)'));
         $grid->column('veterans', __('Veterans'));
-        $grid->column('handi fauteuil', __('Handi fauteuil'));
+        $grid->column('handi_fauteuil', __('Handi fauteuil'));
 
         return $grid;
     }
@@ -82,15 +82,15 @@ class AdminCuescoreNational extends AdminController
                 HTML);
             });
 
-        $show->field('Blackball Master', __('Blackball Master'));
+        $show->field('blackball_master', __('Blackball Master'));
         $show->field('mixte', __('Mixte'));
-        $show->field('mixte tableau A', __('Mixte taleau A'));
-        $show->field('mixte tableau B', __('Mixte taleau B'));
+        $show->field('mixte_tableau_a', __('Mixte taleau A'));
+        $show->field('mixte_tableau_b', __('Mixte taleau B'));
         $show->field('feminin', __('Feminin'));
-        $show->field('juniors (U18)', __('Juniors (U18)'));
-        $show->field('espoirs (U23)', __('Espoirs (U23)'));
+        $show->field('juniors_u18', __('Juniors (U18)'));
+        $show->field('espoirs_u23', __('Espoirs (U23)'));
         $show->field('veterans', __('Veterans'));
-        $show->field('handi fauteuil', __('Handi fauteuil'));
+        $show->field('handi_fauteuil', __('Handi fauteuil'));
 
         return $show;
     }
@@ -111,15 +111,15 @@ class AdminCuescoreNational extends AdminController
                 </a>
             '
         );
-        $form->number('Blackball Master', __('Blackball Master'));
+        $form->number('blackball_master', __('Blackball Master'));
         $form->number('mixte', __('Mixte'));
-        $form->number('mixte tableau A', __('Mixte tableau A'));
-        $form->number('mixte tableau B', __('Mixte tableau B'));
+        $form->number('mixte_tableau_a', __('Mixte tableau A'));
+        $form->number('mixte_tableau_b', __('Mixte tableau B'));
         $form->number('feminin', __('Feminin'));
-        $form->number('juniors (U18)', __('Juniors (U18)'));
-        $form->number('espoirs (U23)', __('Espoirs (U23)'));
+        $form->number('juniors_u18', __('Juniors (U18)'));
+        $form->number('espoirs_u23', __('Espoirs (U23)'));
         $form->number('veterans', __('Veterans'));
-        $form->number('handi fauteuil', __('Handi fauteuil'));
+        $form->number('handi_fauteuil', __('Handi fauteuil'));
 
         $form->html('
                 <div class="alert alert-info text-center mt-4" role="alert" style="font-size:16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)">
@@ -167,11 +167,21 @@ class AdminCuescoreNational extends AdminController
             '
         );
 
-        $form->saved(function (Form $form) {
-            admin_toastr('Classement mis à jour avec succès !', 'success');
-
-            return redirect('admin/blackball/classement');
+        // (Optionnel) sécurise/normalise avant save
+        $form->saving(function (Form $form) {
+            foreach ([
+                'blackball_master', 'mixte', 'mixte_tableau_a', 'mixte_tableau_b', 'feminin', 'juniors_u18',
+                'espoirs_u23', 'veterans', 'handi_fauteuil'
+            ] as $k) {
+                $form->$k = $form->$k !== null ? (int) $form->$k : null;
+            }
         });
+
+        // $form->saved(function (Form $form) {
+        //     admin_toastr('Classement mis à jour avec succès !', 'success');
+
+        //     return redirect('admin/blackball/classement');
+        // });
 
         return $form;
     }

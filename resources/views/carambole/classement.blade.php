@@ -13,14 +13,7 @@
         </x-cadre> --}}
         @if ($fichiers->isNotEmpty())
             <section>
-                <x-title>Classements PDF</x-title>
-
-                <x-cadre>
-                    {{-- <iframe id="pdfViewer" src="{{ asset($fichiers->first()['url']) }}" width="100%" height="800px" style="border: none;"></iframe> --}}
-                    <iframe id="pdfViewer" src="{{ route('files.public', ['path' => str_replace('/storage/','', $fichiers->first()['url'])]) }}" width="100%" height="800px" style="border: none;"></iframe>
-                </x-cadre>
-
-                <div class="flex flex-wrap gap-3 mb-6 justify-center items-center">
+                <div class="flex flex-wrap gap-3 mt-6 justify-center items-center calendrier">
                     @foreach ($fichiers as $fichier)
                         <button 
                             class="px-4 py-2 rounded bg-blue-700 text-white hover:bg-blue-800 transition"
@@ -29,6 +22,13 @@
                         </button>
                     @endforeach
                 </div>
+                <x-title>Classements PDF</x-title>
+                
+                <x-cadre>
+                    {{-- <iframe id="pdfViewer" src="{{ asset($fichiers->first()['url']) }}" width="100%" height="800px" style="border: none;"></iframe> --}}
+                    <iframe id="pdfViewer" src="{{ route('files.public', ['path' => str_replace('/storage/','', $fichiers->first()['url'])]) }}" width="100%" height="800px" style="border: none;"></iframe>
+                </x-cadre>
+
             </section>
             @else
             <section>
@@ -40,3 +40,9 @@
                 @endif
     {{-- </section> --}}
 </x-layout>
+
+<style>
+    .calendrier {
+        margin: 16px 0;
+    }
+</style>

@@ -81,8 +81,8 @@ class SiteSettingController extends AdminController
 
         $form->text('adresse', 'Adresse');
         $form->text('telephone', 'Téléphone')
-            ->rules('regex:/^0[1-9]( ?\d{2}){4}$/')
-            ->help('Format attendu : 06 12 34 56 78');
+            ->rules('nullable|regex:/^0[1-9]( ?\d{2}){4}$/')
+            ->help('Format attendu : 06 12 34 56 78 (laisser vide si non renseigné)');
 
         Admin::script(<<<'JS'
             document.addEventListener('DOMContentLoaded', function () {

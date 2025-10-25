@@ -26,7 +26,7 @@ class CaramboleController extends Controller
     public function index()
     {
         return view('carambole.index', [
-            'posts' => Post::paginate(5),
+            'posts' => Post::paginate(20),
         ]);
     }
 
@@ -40,11 +40,11 @@ class CaramboleController extends Controller
     public function calendrier()
     {
         // Récupérer le calendrier national et regional
-        $carambole_national = CaramboleCalendrierNational::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $carambole_regional = CaramboleCalendrierRegional::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $carambole_international = CaramboleCalendrierInternational::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $carambole_departemental = CaramboleCalendrierDepartemental::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $carambole_calendrier = CaramboleCalendrier::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $carambole_national = CaramboleCalendrierNational::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $carambole_regional = CaramboleCalendrierRegional::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $carambole_international = CaramboleCalendrierInternational::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $carambole_departemental = CaramboleCalendrierDepartemental::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $carambole_calendrier = CaramboleCalendrier::orderBy('id', 'desc')->take(15)->get()->reverse();
 
         return view('carambole.calendrier', compact(
             'carambole_national',
