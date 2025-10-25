@@ -9,4 +9,8 @@ class AmericainCalendrierNational extends Model
     protected $table = 'americain_calendrier_national';
 
     public $timestamps = false;
+
+    public function links(){
+        return $this->hasOne(AmericainNationalLink::class, 'calendrier_id');
+    }
 }

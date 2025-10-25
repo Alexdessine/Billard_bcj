@@ -9,4 +9,8 @@ class SnookerCalendrierInternational extends Model
     protected $table = 'snooker_calendrier_international';
 
     public $timestamps = false;
+
+    public function links(){
+        return $this->hasOne(SnookerInternationalLink::class, 'calendrier_id');
+    }
 }
