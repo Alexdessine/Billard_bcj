@@ -23,7 +23,7 @@ class SnookerController extends Controller
     public function index()
     {
         return view('snooker.index', [
-            'posts' => Post::paginate(5),
+            'posts' => Post::paginate(20),
         ]);
     }
 
@@ -37,11 +37,11 @@ class SnookerController extends Controller
     public function calendrier()
     {
         // Récupérer le calendrier national et regional
-        $snooker_national = SnookerCalendrierNational::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $snooker_regional = SnookerCalendrierRegional::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $snooker_international = SnookerCalendrierInternational::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $snooker_departemental = SnookerCalendrierDepartemental::orderBy('id', 'desc')->take(8)->get()->reverse();
-        $snooker_calendrier = SnookerCalendrier::orderBy('id', 'desc')->take(8)->get()->reverse();
+        $snooker_national = SnookerCalendrierNational::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $snooker_regional = SnookerCalendrierRegional::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $snooker_international = SnookerCalendrierInternational::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $snooker_departemental = SnookerCalendrierDepartemental::orderBy('id', 'desc')->take(15)->get()->reverse();
+        $snooker_calendrier = SnookerCalendrier::orderBy('id', 'desc')->take(15)->get()->reverse();
 
         return view('snooker.calendrier', compact(
             'snooker_national',

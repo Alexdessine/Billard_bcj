@@ -16,7 +16,7 @@
                                             <img src="https://img.youtube.com/vi/{{ \Illuminate\Support\Str::afterLast($post->video, '/') }}/0.jpg" class="w-50 h-auto object-cover m-auto" alt="Miniature de la vidéo">
                                         </div>
                                     @else
-                                        <a href="{{ route('club.show', ['post' => $post, 'back' => url()->full()]) }}"><img class="w-full max-h-72 object-cover lg:max-h-none lg:h-full" src="{{asset('uploads/' . $post->thumbnail) }}"></a>
+                                        <a href="{{ route('club.show', ['post' => $post, 'back' => url()->full()]) }}"><img class="w-50 max-h-none h-auto object-contain lg:max-h-none lg:h-50 lg:w-50 m-auto" src="{{asset('uploads/' . $post->thumbnail) }}"></a>
                                     @endif
                                 </div>
                                 <div class="contenu-texte">

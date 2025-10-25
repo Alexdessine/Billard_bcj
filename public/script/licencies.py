@@ -12,22 +12,18 @@ print(f"Python utilisé : {sys.executable}")
 print("Chargement des variables d'environnement...")
 load_dotenv()
 
-app_env = os.getenv("APP_ENV", "development")
+app_env = os.getenv("APP_ENV", "production")
 print(f"Environnement détecté : {app_env}")
 
 # Choix des variables selon l'environnement
-if app_env == "production":
-    DB_HOST = os.getenv("DB_HOST_PROD")
-    DB_PORT = int(os.getenv("DB_PORT_PROD", 3306))
-    DB_NAME = os.getenv("DB_DATABASE_PROD")
-    DB_USER = os.getenv("DB_USERNAME_PROD")
-    DB_PASSWORD = os.getenv("DB_PASSWORD_PROD")
-else:
-    DB_HOST = os.getenv("DB_HOST")
-    DB_PORT = int(os.getenv("DB_PORT", 3306))
-    DB_NAME = os.getenv("DB_DATABASE")
-    DB_USER = os.getenv("DB_USERNAME")
-    DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = int(os.getenv("DB_PORT", 3306))
+DB_NAME = os.getenv("DB_DATABASE")
+DB_USER = os.getenv("DB_USERNAME")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+
+# Fichier de sortie pour les noms/prénoms
+OUTPUT_FILE = os.getenv("LICENCIES_TXT", "licencies.txt")
 
 # Connexion MySQL
 print("Connexion à la base de données...")
@@ -94,30 +90,47 @@ print(f"{len(rows)} lignes trouvées. Début du traitement...")
 
 total_inserted = 0
 
-for row in rows:
-    tds = row.find_all('td')
-    if len(tds) >= 3:
-        first_td = tds[0].find('a')
-        if first_td:
-            licence = first_td.text.strip()
-            url = f"https://www.telemat.org/FFBI/sif/{first_td['href']}"
-        else:
-            licence = tds[0].text.strip()
-            url = ""
+# --- Écriture des noms/prénoms dans un fichier texte ---
+# Un nom complet par ligne, encodage UTF-8, fins de lignes '\n'
+try:
+    f = open(OUTPUT_FILE, "w", encoding="utf-8", newline="\n")
+    print(f"Fichier texte ouvert : {OUTPUT_FILE}")
+except OSError as e:
+    print(f"Impossible d’ouvrir le fichier {OUTPUT_FILE} en écriture : {e}")
+    cursor.close()
+    conn.close()
+    exit(1)
 
-        nom = tds[1].text.strip().title()
-        prenom = tds[2].text.strip().title()
+try:
+    for row in rows:
+        tds = row.find_all('td')
+        if len(tds) >= 3:
+            first_td = tds[0].find('a')
+            if first_td:
+                licence = first_td.text.strip()
+                url_detail = f"https://www.telemat.org/FFBI/sif/{first_td['href']}"
+            else:
+                licence = tds[0].text.strip()
+                url_detail = ""
 
-        cursor.execute('''
-            INSERT INTO licencies (licence, nom, prenom, url)
-            VALUES (%s, %s, %s, %s)
-        ''', (licence, nom, prenom, url))
+            nom = tds[1].text.strip().title()
+            prenom = tds[2].text.strip().title()
 
-        print(f"Ajout : {prenom} {nom} ({licence})")
-        total_inserted += 1
+            cursor.execute('''
+                INSERT INTO licencies (licence, nom, prenom, url)
+                VALUES (%s, %s, %s, %s)
+            ''', (licence, nom, prenom, url_detail))
 
-conn.commit()
-print(f"Importation terminée. Total des licenciés insérés : {total_inserted}")
+            # Écrit "Prénom Nom" dans le fichier texte
+            f.write(f"{prenom} {nom}\n")
 
-cursor.close()
-conn.close()
+            print(f"Ajout : {prenom} {nom} ({licence})")
+            total_inserted += 1
+
+    conn.commit()
+    print(f"Importation terminée. Total des licenciés insérés : {total_inserted}")
+finally:
+    f.close()
+    cursor.close()
+    conn.close()
+    print(f"Fichier texte fermé : {OUTPUT_FILE}")

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme')
 export default {
+  darkMode: 'class', // <-- on pilote via .dark sur <html>
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",

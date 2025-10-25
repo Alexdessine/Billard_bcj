@@ -92,9 +92,37 @@ Route::get('test-lang', function () {
     return __('validation.mimes', ['attribute' => 'fichier', 'values' => 'pdf']);
 });
 
+// Route test
+Route::get('/test', function () {
+    return view('test');
+});
+
+// Route test
+Route::get('/calendrier', function () {
+    return view('calendrier');
+})->name('calendrier');
+
 Route::get('/files/{path}', function (string $path) {
     abort_unless(Storage::disk('public')->exists($path), 404);
     return response()->file(Storage::disk('public')->path($path), [
         'Cache-Control' => 'public, max-age=86400',
     ]);
 })->where('path', '.*')->name('files.public');
+
+
+if (app()->environment(['local', 'staging'])) {
+    Route::prefix('_errors')->group(function () {
+        $codes = [401, 402, 403, 404, 419, 429, 500, 503];
+
+        Route::get('/', function () use ($codes) {
+            // petite page index de liens (optionnelle)
+            return response()->view('errors.preview-index', compact('codes'));
+        });
+
+        Route::get('/{code}', function ($code) use ($codes) {
+            abort_unless(in_array((int)$code, $codes, true), 404);
+            // Rend exactement resources/views/errors/{code}.blade.php
+            return response()->view("errors.$code", [], (int)$code);
+        })->whereNumber('code');
+    });
+}

@@ -12,6 +12,11 @@ class PreventRequestsDuringMaintenance extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'admin',        // si ton tableau de bord est sur /admin
+        'admin/*',      // et toutes ses sous-routes
+        'login',        // écran de connexion si nécessaire
+        'logout',
+        // ajoute aussi les assets de l’admin si besoin :
+        'admin/assets/*',
     ];
 }

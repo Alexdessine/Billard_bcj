@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'ckeditor' => [
+        'license_key' => env('CKE5_LICENSE_KEY', ''),
+        // 'token_url'   => env('CKE5_CLOUD_TOKEN_URL', ''),
+    ],
+
+
 ];

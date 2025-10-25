@@ -31,9 +31,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Forcer HTTPS en local si besoin
-        // if (app()->environment('local')) {
-        //     URL::forceScheme('https');
-        // }
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
 
         // Injecter la langue FR dans le datepicker d'OpenAdmin
         // Admin::booting(function () {

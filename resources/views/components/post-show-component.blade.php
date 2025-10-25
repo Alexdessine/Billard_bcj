@@ -19,12 +19,52 @@
                 {{-- Début du post --}}
                 <div class="flex flex-col lg:flex-row pb-10 md:pb-16">
                     <div class="lg:w-5/12">
+                        @php
+                            // Récupère un ID YouTube robuste depuis youtu.be, youtube.com/watch?v=..., /embed/..., /shorts/...
+                            function yt_id($url) {
+                                if (preg_match('~(?:youtu\.be/|youtube\.com/(?:watch\?v=|embed/|shorts/))([A-Za-z0-9_-]{11})~', $url, $m)) {
+                                    return $m[1];
+                                }
+                                return $url; // au cas où on te passe déjà un ID
+                            }
+                            $vid = yt_id($post->video);
+                        @endphp
+
                         @if ($post->video)
-                            <div class="aspect-w-10 aspect-h-9">
-                                <iframe width="100%" height="315" src="{{ $post->video }}" frameborder="0" allowfullscreen></iframe>
+                        <div class="yt-inline" data-video-id="{{ $vid }}">
+                            {{-- Zone vidéo avec ratio --}}
+                            <div class="relative aspect-video bg-black overflow-hidden rounded-lg">
+                            {{-- Thumbnail cliquable --}}
+                            <button type="button"
+                                    class="yt-thumb absolute inset-0 w-full h-full"
+                                    onclick="ytInlinePlay(this)">
+                                <img src="https://img.youtube.com/vi/{{ $vid }}/hqdefault.jpg"
+                                    alt="Miniature de la vidéo"
+                                    class="w-full h-full object-cover">
+                                <span class="yt-play pointer-events-none"></span>
+                            </button>
+
+                            {{-- Iframe (sans src tant que pas consenti) --}}
+                            <iframe class="yt-iframe hidden w-full h-full"
+                                    title="YouTube player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allowfullscreen></iframe>
                             </div>
+
+                            {{-- Petit mur de consentement inline (affiché si marketing refusé) --}}
+                            <div class="yt-consent hidden mt-3 rounded-lg border border-gray-200 bg-white p-4 text-sm">
+                            Cette vidéo est hébergée par YouTube. Pour la lire, autorisez les cookies de marketing.
+                            <div class="mt-2 flex gap-2">
+                                <button type="button" class="px-3 py-2 rounded bg-gray-900 text-white" onclick="ytEnableMarketingAndPlay(this)">Autoriser & lire</button>
+                                <button type="button" class="px-3 py-2 rounded border" onclick="openCookiePreferences && openCookiePreferences()">Préférences</button>
+                            </div>
+                            </div>
+                        </div>
                         @else
-                            <img class="w-full h-auto lg:max-h-none lg:h-full" src="{{asset('uploads/' . $post->thumbnail) }}">
+
+                            <img class="w-full h-auto lg:max-h-none lg:h-full" src="{{asset('storage/' . $post->thumbnail) }}">
                         @endif
                         {{-- <img class="w-full max-h-72 object-cover lg:max-h-none lg:h-full" src="{{ $post->thumbnail }}"> --}}
                     </div>
@@ -49,3 +89,7 @@
                 </div>
                 {{-- Fin du post --}}
             </div>
+            <style>
+.yt-play{position:absolute;inset:0;margin:auto;width:68px;height:48px;border-radius:14px;background:rgba(0,0,0,.6)}
+.yt-play::before{content:"";position:absolute;left:26px;top:14px;border-style:solid;border-width:10px 0 10px 16px;border-color:transparent transparent transparent #fff}
+</style>

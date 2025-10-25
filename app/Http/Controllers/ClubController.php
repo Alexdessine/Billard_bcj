@@ -27,12 +27,12 @@ class ClubController extends Controller
             $posts = Post::whereNull('discipline')
             ->whereBetween('year', [$startYear, $endYear])
             ->orderBy('created_at', 'desc')
-            ->paginate(8);
+            ->paginate(20);
         } else {
             // SI aucun filtre ou filtre invalide, récupérer tout les posts
             $posts = Post::whereNull('discipline')
                 ->orderBy('created_at', 'desc')
-                ->paginate(8);
+                ->paginate(20);
         }
         return view('club.index', ['posts' => $posts]);
     }
@@ -51,7 +51,7 @@ class ClubController extends Controller
     public function clubByTag(string $year): View
     {
         // Récupère les posts correspondant à l'année demandée
-        $posts = Post::where('year', $year)->latest()->paginate(8);
+        $posts = Post::where('year', $year)->latest()->paginate(20);
 
         return view('club.byTag', compact('year', 'posts'));
     }
@@ -97,7 +97,7 @@ class ClubController extends Controller
         $posts = Post::whereNull('discipline')
                     ->whereBetween('year', [$selectedDecade['end'], $selectedDecade['start']])
                     ->orderBy('created_at', 'desc')
-                    ->paginate(8);
+                    ->paginate(20);
 
         return view('club.byDecade', compact('selectedDecade', 'posts'));
     }

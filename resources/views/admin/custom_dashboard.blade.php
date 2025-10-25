@@ -64,6 +64,10 @@
     .externe {
         background: linear-gradient(135deg, #3182ce, #63b3ed); /* dégradé bleu ciel */
     }
+
+    .analytics {
+        background: linear-gradient(135deg, #f9ab00, #e37400);
+    }
 </style>
 
 <div class="admin-grid">
@@ -119,4 +123,14 @@
             <i class="fa-solid fa-globe"></i>
         </a>
     </div>
+    <div class="admin-card analytics">
+        <a href="https://analytics.google.com/analytics/web/?authuser=1&hl=fr#/a367599531p504145739/reports/explorer?params=_u..nav%3Dmaui&collectionId=business-objectives&ruid=all-pages-and-screens,business-objectives,raise-brand-awareness&r=all-pages-and-screens" target="_blank">
+            <strong>Google Analytics</strong>
+            <i class="fa-solid fa-chart-line"></i>
+        </a>
+    </div>
+</div>
+
+<div class="admin-grid">
+
 </div>

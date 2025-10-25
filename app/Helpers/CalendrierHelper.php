@@ -68,7 +68,7 @@ class CalendrierHelper
             HTML;
 
             if (!empty($row->club)) {
-                echo "<strong>🎱 Club organisateur : </strong> {$row->club} <br>";
+                echo "<strong>🎱 Organisateur : </strong> {$row->club} <br>";
             }
 
             echo <<<HTML

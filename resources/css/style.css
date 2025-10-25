@@ -1,17 +1,41 @@
+:root, html, body {
+    color-scheme: light !important;
+}
+
 :root {
+    color-scheme: light;
+    --background: linear-gradient(94deg, #ff65a3, #0e4daa);
+    --bg: #fff;
+    --fg: #fff;
     --building-color: #0051ff;
     --pool-color: #222222;
     --carambole-color: #ff1e00;
     --snooker-color: #003cff;
     --bouton-bleu: #0370b7;
     --bouton-bleu-hover: #024572;
+    --primary: #0e4daa;
+    --titre: #0e4daa;
+}
+
+:root.dark{
+    color-scheme: dark;
+    --background: linear-gradient(94deg, #ff65a3, #0e4daa);
+    --bg: #fff;
+    --fg: #fff;
+    --building-color: #0051ff;
+    --pool-color: #222222;
+    --carambole-color: #ff1e00;
+    --snooker-color: #003cff;
+    --bouton-bleu: #0370b7;
+    --bouton-bleu-hover: #024572;
+    --primary: #0e4daa;
 }
 
 html{
     height: 100vh;
     margin: 0;
     padding: 0;
-    background: linear-gradient(94deg, #ff65a3, #0e4daa);
+    background: var(--background);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -21,6 +45,11 @@ html{
 
 body{
     background-color: transparent;
+}
+
+#cc-banner.cc-hidden,
+#cc-modal.cc-hidden {
+    display: none;
 }
 
 .accordion-collapse.collapse.show {
@@ -62,7 +91,7 @@ body{
 }
 
 .titre{
-    background-color: #0e4daa;
+    background-color: var(--titre);
     width: fit-content;
     text-align: center;
     padding: 6px;
@@ -71,7 +100,7 @@ body{
     top: 18px;
     left: 50%;
     transform: translateX(-50%);
-    color: white;
+    color: var(--fg);
     font-weight: 700;
 }
 
@@ -80,7 +109,7 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
-    background-color: white;
+    background-color: var(--bg) !important;
     max-width: 85vw;
     margin: auto;
     border-radius: 10px;
@@ -89,7 +118,32 @@ body{
     margin-bottom: 20px;
 }
 
+.dark .cadre{
+    background-color: var(--bg) !important;
+}
+
+[data-bs-theme="dark"] .cadre {
+    background-color: var(--bg) !important;
+}
 /* Page acceuil start */
+
+/* Bouton consentement start */
+
+.btn-link{
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background-color: var(--bg);
+    width: 60px;
+    height: 60px;
+}
+
+.btn-link .fa-key{
+    font-size: 1.5em;
+    color: var(--bouton-bleu);
+}
+
+/* Bouton consentement end */
 
 .accueil{
     max-width: 90vw;
@@ -124,6 +178,14 @@ body{
     grid-row: 1;
 }
 
+.thumb{
+    width: 175px !important;
+    /* aspect-ratio: 3/4; */
+    object-fit: fit-content;
+    display: block;
+    margin-right: 10px;
+}
+
 /* ----------------- Mpas start large ----------------- */
 /**
  * @license
@@ -142,7 +204,7 @@ body{
 /* ---------------- Maps icons set start -------------------------- */
 .property{
     align-items: center;
-    background-color: #FFFFFF;
+    background-color: var(--bg);
     border-radius: 50%;
     color: #263238;
     display: flex;
@@ -176,7 +238,7 @@ body{
     align-items: center;
     display: flex;
     justify-content: center;
-    color: #FFFFFF;
+    color: var(--fg);
 }
 
 .property .icon svg{
@@ -219,7 +281,7 @@ body{
  * Property styles in highlighted state.
  */
 .property.highlight{
-    background-color: #FFFFFF;
+    background-color: var(--bg);
     border-radius: 8px;
     box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
     height: 80px;
@@ -228,7 +290,7 @@ body{
 }
 
 .property.highlight::after {
-    border-top: 9px solid #FFFFFF;
+    border-top: 9px solid var(--bg);
 }
 
 .property.highlight .details {
@@ -350,21 +412,19 @@ body{
 .encadrement{
     display: flex;
     flex-direction: row;
-    /* background-color: green; */
     width: 81vw;
 }
 
 .contenu {
-    /* background-color: green; */
     display: flex;
     margin: 15px 0;
 }
 
 .contenu .image{
-    /* background-color: red; */
     width: 350px;
     display: flex;
     align-items:center;
+    margin-right: 20px;
 }
 
 .contenu-texte{
@@ -388,9 +448,8 @@ body{
 }
 
 .classement_titre_table{
-    /* background-color: #0e4daa; */
     border-bottom: 2px solid #0e4daa;
-    color: #0e4daa;
+    color: var(--titre);
     font-weight: 700;
     padding: 5px;
     border-radius: 5px;
@@ -402,7 +461,7 @@ body{
 }
 
 .table-format i{
-    color: #0e4daa;
+    color: var(--titre);
     padding-right: 5px;
 }
 
@@ -445,7 +504,7 @@ body{
 .accordion-header button{
     font-size: 1.2em;
     font-weight: 600;
-    color: #0e4daa;
+    color: var(--titre);
 }
 
 .accordion-item{
@@ -453,7 +512,7 @@ body{
     width: 90vw;
     padding: 10px;
     margin-bottom: 10px;
-    border: 2px solid #0e4daa !important;
+    border: 2px solid var(--titre) !important;
     border-radius: 10px !important;
 }
 
@@ -465,7 +524,7 @@ body{
 .calendrier-items{
     font-size: 1.2em;
     font-weight: 600;
-    color: #0e4daa;
+    color: var(--titre);
     text-align: left;
     /* background-color: green; */
 }
@@ -567,6 +626,16 @@ body{
     color: #9E9E9E;
 }
 
+.calendrier{
+    max-width: 1400px;
+    width: 95%;
+    height: 800px;
+}
+
+.calendrier-month {
+    display: none;
+}
+
 @media only screen and (min-width:868px) and (max-width:1023px){
     .accueil {
         display: flex;
@@ -635,6 +704,14 @@ body{
         width: 100%;
         display: flex;
         justify-content: center;
+    }
+
+    .calendrier-week {
+        display: none;
+    }
+
+    .calendrier-month {
+        display: block;
     }
 
     /* page club end */

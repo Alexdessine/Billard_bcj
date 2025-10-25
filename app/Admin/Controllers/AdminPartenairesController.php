@@ -2,11 +2,15 @@
 
 namespace App\Admin\Controllers;
 
-use OpenAdmin\Admin\Controllers\AdminController;
 use OpenAdmin\Admin\Form;
 use OpenAdmin\Admin\Grid;
 use OpenAdmin\Admin\Show;
 use \App\Models\Partenaire;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
+use OpenAdmin\Admin\Controllers\AdminController;
+use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 
 class AdminPartenairesController extends AdminController
 {
@@ -34,7 +38,7 @@ class AdminPartenairesController extends AdminController
             }
 
             // Sinon, affiche l'image
-            return '<img src="' . asset('uploads/' . $thumbnail) . '" alt="Thumbnail" class="object-cover" style="width:48px; height:auto;">';
+            return '<img src="' . asset('storage/' . $thumbnail) . '" alt="Thumbnail" class="object-cover" style="width:48px; height:auto;">';
         });
 
         return $grid;
@@ -56,7 +60,7 @@ class AdminPartenairesController extends AdminController
                 return ''; // Ne rien afficher si le thumbnail est vide
             }
         
-            return '<img src="' . asset('uploads/' . $thumbnail) . '" alt="Thumbnail" class="object-cover" style="width:192px; height:auto;">';
+            return '<img src="' . asset('storage/' . $thumbnail) . '" alt="Thumbnail" class="object-cover" style="width:192px; height:auto;">';
         });
 
         return $show;
@@ -71,8 +75,48 @@ class AdminPartenairesController extends AdminController
     {
         $form = new Form(new Partenaire());
 
-        $form->text('titre', __('Titre'));
-        $form->file('img', __('Image'))->move('partenaires')->uniqueName()->removable();
+        $form->text('titre', __('Titre'))->required();
+        $form->file('img', __('Image'))->removable();
+        $form->ignore(['img']);
+
+        $form->saving(function ($form) {
+            /** @var \Illuminate\Http\UploadedFile|null $file */
+            $file = request()->file('img');
+            if (!$file) return;
+
+            $manager = new ImageManager(new GdDriver());
+            $image   = $manager->read($file);
+
+            // Limite la taille de l’original si très large
+            if ($image->width() > 1600) {
+                $image = $image->scale(width: 1600);
+            }
+
+            // Miniature : on relit le fichier (au lieu d’un clone)
+            $thumb = $manager->read($file)->scale(width: 175);
+
+            $dir      = 'partenaires';
+            $basename = (string) Str::uuid();
+
+            $originalData = (string) $image->toWebp(quality: 82);
+            $thumbData    = (string) $thumb->toWebp(quality: 82);
+
+            $originalPath = "{$dir}/{$basename}.webp";
+            $thumbPath    = "{$dir}/{$basename}@175.webp";
+
+            Storage::disk('public')->put($originalPath, $originalData);
+            Storage::disk('public')->put($thumbPath, $thumbData);
+
+            // Nettoyage ancien fichier si update
+            if ($form->model()->exists && $form->model()->getOriginal('img')) {
+                $old = $form->model()->getOriginal('img'); // ex: partenaires/xxx.webp
+                $oldThumb = preg_replace('/(\.\w+)$/', '@175.webp', $old);
+                Storage::disk('public')->delete([$old, $oldThumb]);
+            }
+
+            $form->model()->img = $originalPath;
+            // $form->model()->thumb = $thumbPath; // si tu as une colonne dédiée
+        });
 
         return $form;
     }

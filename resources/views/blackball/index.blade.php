@@ -14,6 +14,7 @@
     </section>
 </x-layout>
 
+
 <style>
     /* page club start */
 
