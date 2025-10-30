@@ -204,7 +204,7 @@ header.pc .discipline a.active img {
     }
 
     header.mobile .logo{
-        display: flex;
+        display: inline-flex;
         height: auto;
         align-items: center;
         margin: auto;
@@ -214,8 +214,11 @@ header.pc .discipline a.active img {
     header.mobile .logo img{
         max-height: 44px;
         height: auto;
+        max-width: 100%;
         width: auto;
+        display: block;
         object-fit: contain;
+        max-height: none;
     }
 
     header.mobile .burger{
