@@ -33,4 +33,7 @@ class DepartementalLink extends Model
 
         return $links;
     }
+    
+
+    public $timestamps = false;
 }
