@@ -7,6 +7,8 @@ use OpenAdmin\Admin\Form;
 use OpenAdmin\Admin\Grid;
 use OpenAdmin\Admin\Show;
 use \App\Models\DepartementalLink;
+use App\Models\Calendrier_departemental;
+
 
 class AdminDepartementalLink extends AdminController
 {
@@ -73,7 +75,20 @@ class AdminDepartementalLink extends AdminController
     {
         $form = new Form(new DepartementalLink());
 
-        $form->number('calendrier_id', __('Calendrier id'));
+        if ($form->isCreating()) {
+            // En création : tu fies l'ID via un champ hidden + affichage en lecture seule
+            $form->hidden('calendrier_id')->default(request('calendrier_id'));
+
+            $calendrier = Calendrier_departemental::find(request('calendrier_id'));
+            if($calendrier) {
+                $form->display('titre_calendrier', 'Tournoi')->default($calendrier->titre);
+            }
+        }else{
+            // En édition : l'ID est déjà défini
+            $form->display('calendrier.titre', 'Tournoi');
+        }
+
+        $form->number('calendrier_id', __('Calendrier id'))->default(request('calendrier_id'));
         $form->text('mixte', __('Mixte'));
         $form->text('feminin', __('Feminin'));
         $form->text('U18', __('U18'));
