@@ -7,6 +7,7 @@ use OpenAdmin\Admin\Form;
 use OpenAdmin\Admin\Grid;
 use OpenAdmin\Admin\Show;
 use \App\Models\Calendrier_departemental;
+use App\Models\DepartementalLink;
 
 class AdminCalendrierDepartemental extends AdminController
 {
@@ -43,6 +44,15 @@ class AdminCalendrierDepartemental extends AdminController
         $grid->column('lieu', __('Lieu'));
         $grid->column('club', __('Club'));
         $grid->column('url', __('Url'));
+        $grid->column('actions', __('Liens'))->display(function () {
+            $linkExists = DepartementalLink::where('calendrier_id', $this->id)->exists();
+
+            if ($linkExists) {
+                return '<a href="/admin/departemental-links?calendrier_id=' . $this->id . '" class="btn btn-sm btn-primary">Voir les liens Cuescore</a>';
+            } else {
+                return '<a href="/admin/departemental-links/create?calendrier_id=' . $this->id . '" class="btn btn-sm btn-warning">Ajouter les liens Cuescore</a>';
+            }
+        });
 
         return $grid;
     }

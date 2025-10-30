@@ -28,7 +28,6 @@ class AdminDepartementalLink extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('calendrier_id', __('Calendrier id'));
-        $grid->column('top_ligue', __('Top ligue'));
         $grid->column('mixte', __('Mixte'));
         $grid->column('feminin', __('Feminin'));
         $grid->column('U18', __('U18'));
@@ -53,7 +52,6 @@ class AdminDepartementalLink extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('calendrier_id', __('Calendrier id'));
-        $show->field('top_ligue', __('Top ligue'));
         $show->field('mixte', __('Mixte'));
         $show->field('feminin', __('Feminin'));
         $show->field('U18', __('U18'));
@@ -76,7 +74,6 @@ class AdminDepartementalLink extends AdminController
         $form = new Form(new DepartementalLink());
 
         $form->number('calendrier_id', __('Calendrier id'));
-        $form->text('top_ligue', __('Top ligue'));
         $form->text('mixte', __('Mixte'));
         $form->text('feminin', __('Feminin'));
         $form->text('U18', __('U18'));
