@@ -198,7 +198,7 @@ header.pc .discipline a.active img {
         align-items: center;
         gap: 10px;
         overflow-y: hidden;
-        z-index: 2000;
+        z-index: 4000;
         /* position: sticky;
         top: 0; */
     }
@@ -264,8 +264,12 @@ header.pc .discipline a.active img {
 
     .links.active{
         transform: translateX(0);
-        z-index: 9999;
+        z-index: 4000 !important;
     }
+
+.links.active .flex-1 {
+    opacity: 0 !important;
+}
 
     .menu {
         background-color: white;
