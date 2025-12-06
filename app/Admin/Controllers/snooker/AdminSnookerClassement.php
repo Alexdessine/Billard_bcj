@@ -27,7 +27,7 @@ class AdminSnookerClassement extends AdminController
         $grid = new Grid(new SnookerClassement());
 
         $grid->column('id', __('Id'));
-        $grid->column('mixte', __('Mixte'));
+        $grid->column('master', __('Master'));
         $grid->column('url', __('Lien'));
 
         return $grid;
@@ -44,7 +44,7 @@ class AdminSnookerClassement extends AdminController
         $show = new Show(SnookerClassement::findOrFail($id));
 
         $show->field('id', __('Id'));
-        $show->field('mixte', __('Mixte'));
+        $show->field('master', __('Master'));
         $show->field('url', __('Lien'));
 
         return $show;
@@ -59,7 +59,7 @@ class AdminSnookerClassement extends AdminController
     {
         $form = new Form(new SnookerClassement());
 
-        $form->number('mixte', __('Mixte'));
+        $form->number('master', __('Master'));
         $form->url('url', __('Lien'));
         $form->html('
                 <div class="alert alert-info text-center mt-4" role="alert" style="font-size:16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)">
