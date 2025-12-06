@@ -164,7 +164,7 @@
         <div class="partenaires-flex">
             @foreach ($partenaires as $image)
                 <div class="partenaire-item">
-                    <img src="{{ asset('storage/' . $image->img) }}" alt="{{ $image->titre ?: ''}}" class="src" @if(empty($image->titre)) aria-hidden="true" @endif loading="lazy" decoding="async">
+                    <a href="{{ $image->url }}" target="_blank" rel="noopener noreferrer"><img src="{{ asset('storage/' . $image->img) }}" alt="{{ $image->titre ?: ''}}" class="src" @if(empty($image->titre)) aria-hidden="true" @endif loading="lazy" decoding="async"></a>
                 </div>
             @endforeach
         </div>
