@@ -58,7 +58,7 @@
 </script>
 <!-- End Matomo Code -->
 
-@include('partials.matomo')
+{{-- @include('partials.matomo') --}}
 
 </head>
 <body class="min-h-screen flex flex-col">

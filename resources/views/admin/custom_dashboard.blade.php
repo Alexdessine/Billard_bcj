@@ -66,7 +66,7 @@
     }
 
     .analytics {
-        background: linear-gradient(135deg, #f9ab00, #e37400);
+        background: linear-gradient(135deg, #3152A0, #5D8AFF);
     }
 </style>
 
@@ -124,8 +124,8 @@
         </a>
     </div>
     <div class="admin-card analytics">
-        <a href="https://analytics.google.com/analytics/web/?authuser=1&hl=fr#/a367599531p504145739/reports/explorer?params=_u..nav%3Dmaui&collectionId=business-objectives&ruid=all-pages-and-screens,business-objectives,raise-brand-awareness&r=all-pages-and-screens" target="_blank">
-            <strong>Google Analytics</strong>
+        <a href="https://www.analytics.bcj37.fr/matomo/" target="_blank">
+            <strong>Analyse Matomo</strong>
             <i class="fa-solid fa-chart-line"></i>
         </a>
     </div>
