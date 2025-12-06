@@ -40,6 +40,7 @@ class AdminPartenairesController extends AdminController
             // Sinon, affiche l'image
             return '<img src="' . asset('storage/' . $thumbnail) . '" alt="Thumbnail" class="object-cover" style="width:48px; height:auto;">';
         });
+        $grid->column('url', __('URL'));
 
         return $grid;
     }
@@ -62,6 +63,7 @@ class AdminPartenairesController extends AdminController
         
             return '<img src="' . asset('storage/' . $thumbnail) . '" alt="Thumbnail" class="object-cover" style="width:192px; height:auto;">';
         });
+        $show->field('url', __('URL'));
 
         return $show;
     }
@@ -78,6 +80,7 @@ class AdminPartenairesController extends AdminController
         $form->text('titre', __('Titre'))->required();
         $form->file('img', __('Image'))->removable();
         $form->ignore(['img']);
+        $form->url('url', __('URL'));
 
         $form->saving(function ($form) {
             /** @var \Illuminate\Http\UploadedFile|null $file */
