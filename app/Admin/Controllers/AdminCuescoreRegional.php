@@ -118,7 +118,7 @@ class AdminCuescoreRegional extends AdminController
          *  - db => nom EXACT de la colonne en base (peut contenir espace / tirets)
          *  - label => libellé affiché
          */
-        $fieds = [
+        $fields = [
             'top_ligue' => ['db' => 'Top ligue', 'label' => 'Top ligue'],
             'mixte' => ['db' => 'mixte', 'label' => 'Mixte'],
             'feminin' => ['db' => 'feminin', 'label' => 'Feminin'],
@@ -129,6 +129,13 @@ class AdminCuescoreRegional extends AdminController
             'espoirs_u23' => ['db' => 'espoirs (U23)', 'label' => 'Espoirs (U23)'],
             'veteran' => ['db' => 'veteran', 'label' => 'Veteran'],
         ];
+
+        // Pré-remplissage des champs du formulaire à partir des colonnes DB "bizarre"
+        $model = $form->model();
+        foreach ($fields as $formKey => $cfg){
+            $form->number($formKey, __($cfg['label']))
+                ->default(data_get($model->getAttribute(), $cfg['db']));
+        }
 
         $form->number('Top ligue', __('Top ligue'));
         $form->number('mixte', __('Mixte'));
