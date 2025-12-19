@@ -134,19 +134,30 @@ class AdminCuescoreRegional extends AdminController
         $model = $form->model();
         foreach ($fields as $formKey => $cfg){
             $form->number($formKey, __($cfg['label']))
-                ->default(data_get($model->getAttribute(), $cfg['db']));
+                ->default(data_get($model->getAttributes(), $cfg['db']));
         }
 
-        $form->number('Top ligue', __('Top ligue'));
-        $form->number('mixte', __('Mixte'));
-        $form->number('feminin', __('Feminin'));
-        $form->number('handi-fauteuil', __('Handi fauteuil'));
-        $form->number('handi-debout', __('Handi debout'));
-        $form->number('benjamin (U15)', __('Benjamin (U15)'));
-        $form->number('junior', __('Junior (U18)'));
-        $form->number('espoirs (U23)', __('Espoirs (U23)'));
-        $form->number('veteran', __('Veteran'));
+        // Sauvegarde : on remap propre -> DB
+        $form->saving(function (Form $form) use ($fields) {
+            $model = $form->model();
 
+            foreach ($fields as $formKey => $cfg) {
+                // Récupère la valeur envoyé par le formulaire
+                $value = request($formKey);
+
+                // On force null quand cellule vide
+                $value = ($value === '' ? null : $value);
+
+                // Ecrit dans la VRAIE colonne en base
+                $model->setAttribute($cfg['db'], $value);
+            }
+
+            // IMPORTANT
+            // On évite que OpenAdmin tente d'écrire des colonnes "propres" inexistantes
+            foreach (array_keys($fields) as $formKey) {
+                unset($model->{$formKey});
+            }
+        });
             // Affichage de ta notice en dessous du formulaire
     $form->html('
         <div class="alert alert-info text-center mt-4" role="alert" style="font-size:16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); position:relative;">
