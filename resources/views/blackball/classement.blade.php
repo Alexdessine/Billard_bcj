@@ -38,7 +38,11 @@
     <section>
         <x-title>Classement régional {{ $startYear }} / {{ $endYear }}</x-title>
         <x-cadre>
+            @php 
+                $ignoredKeys = ['top_ligue', 'handi_fauteuil', 'handi_debout', 'benjamin_u15', 'espoirs_u23'];
+            @endphp
         @foreach ($regionalData as $categorie => $participants)
+            @continue(in_array($categorie, $ignoredKeys, true))
             @if(!empty($participants))
                 <div class="classement_table">
                     <div class="classement_titre_table">
