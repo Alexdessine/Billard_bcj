@@ -112,6 +112,24 @@ class AdminCuescoreRegional extends AdminController
             '
         );
 
+        /**
+         * Mapping: 
+         *  - key => nom du champ dans le formulaire (propre)
+         *  - db => nom EXACT de la colonne en base (peut contenir espace / tirets)
+         *  - label => libellé affiché
+         */
+        $fieds = [
+            'top_ligue' => ['db' => 'Top ligue', 'label' => 'Top ligue'],
+            'mixte' => ['db' => 'mixte', 'label' => 'Mixte'],
+            'feminin' => ['db' => 'feminin', 'label' => 'Feminin'],
+            'handi_fauteuil' => ['db' => 'handi-fauteuil', 'label' => 'Handi fauteuil'],
+            'handi_debout' => ['db' => 'handi-debout', 'label' => 'Handi debout'],
+            'benjamin_u15' => ['db' => 'benjamin (U15)', 'label' => 'Benjamin (U15)'],
+            'junior' => ['db' => 'junior', 'label' => 'Junior (U18)'],
+            'espoirs_u23' => ['db' => 'espoirs (U23)', 'label' => 'Espoirs (U23)'],
+            'veteran' => ['db' => 'veteran', 'label' => 'Veteran'],
+        ];
+
         $form->number('Top ligue', __('Top ligue'));
         $form->number('mixte', __('Mixte'));
         $form->number('feminin', __('Feminin'));
