@@ -14,58 +14,26 @@ class CuescoreRegional extends Model
 
     protected $guarded = [];
 
-    // --- Top ligue (colonne: "Top ligue") ---
-    public function getTopLigueAttribute()
+    protected static function booted()
     {
-        return $this->attributes['Top ligue'] ?? null;
-    }
+        static::retrieved(function (self $model) {
+            $map = [
+                'top_ligue'      => 'Top ligue',
+                'handi_fauteuil' => 'handi-fauteuil',
+                'handi_debout'   => 'handi-debout',
+                'benjamin_u15'   => 'benjamin (U15)',
+                'espoirs_u23'    => 'espoirs (U23)',
+            ];
 
-    public function setTopLigueAttribute($value)
-    {
-        $this->attributes['Top ligue'] = $value;
-    }
+            foreach ($map as $alias => $realColumn) {
+                $value = $model->attributes[$realColumn] ?? null;
 
-    // --- handi-fauteuil ---
-    public function getHandiFauteuilAttribute()
-    {
-        return $this->attributes['handi-fauteuil'] ?? null;
-    }
+                // On crée l'attribut "propre"
+                $model->attributes[$alias] = $value;
 
-    public function setHandiFauteuilAttribute($value)
-    {
-        $this->attributes['handi-fauteuil'] = $value;
-    }
-
-    // --- handi-debout ---
-    public function getHandiDeboutAttribute()
-    {
-        return $this->attributes['handi-debout'] ?? null;
-    }
-
-    public function setHandiDeboutAttribute($value)
-    {
-        $this->attributes['handi-debout'] = $value;
-    }
-
-    // --- benjamin (U15) ---
-    public function getBenjaminU15Attribute()
-    {
-        return $this->attributes['benjamin (U15)'] ?? null;
-    }
-
-    public function setBenjaminU15Attribute($value)
-    {
-        $this->attributes['benjamin (U15)'] = $value;
-    }
-
-    // --- espoirs (U23) ---
-    public function getEspoirsU23Attribute()
-    {
-        return $this->attributes['espoirs (U23)'] ?? null;
-    }
-
-    public function setEspoirsU23Attribute($value)
-    {
-        $this->attributes['espoirs (U23)'] = $value;
+                // Et surtout : on le met aussi dans "original" (ce que OpenAdmin lit en edit)
+                $model->syncOriginalAttribute($alias);
+            }
+        });
     }
 }

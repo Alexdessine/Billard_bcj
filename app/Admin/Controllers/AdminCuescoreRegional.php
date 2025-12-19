@@ -104,43 +104,49 @@ class AdminCuescoreRegional extends AdminController
 {
     $form = new Form(new CuescoreRegional());
 
-    $url = admin_url('blackball/classement');
-    $form->html('
-        <a href="' . $url . '" class="btn btn-primary" style="margin: auto; margin-bottom: 10px; justify-content:center; display:flex; width:250px;">
-            ↩️ Retour au classement Blackball
-        </a>
-    ');
+    $fields = [
+        'top_ligue'       => ['db' => 'Top ligue',        'label' => 'Top ligue'],
+        'mixte'           => ['db' => 'mixte',            'label' => 'Mixte'],
+        'feminin'         => ['db' => 'feminin',          'label' => 'Feminin'],
+        'handi_fauteuil'  => ['db' => 'handi-fauteuil',   'label' => 'Handi fauteuil'],
+        'handi_debout'    => ['db' => 'handi-debout',     'label' => 'Handi debout'],
+        'benjamin_u15'    => ['db' => 'benjamin (U15)',   'label' => 'Benjamin (U15)'],
+        'junior'          => ['db' => 'junior',           'label' => 'Junior (U18)'],
+        'espoirs_u23'     => ['db' => 'espoirs (U23)',    'label' => 'Espoirs (U23)'],
+        'veteran'         => ['db' => 'veteran',          'label' => 'Veteran'],
+    ];
 
-    // Déclaration des champs
-    $form->number('top_ligue', 'Top ligue');
-    $form->number('mixte', 'Mixte');
-    $form->number('feminin', 'Feminin');
-    $form->number('handi_fauteuil', 'Handi fauteuil');
-    $form->number('handi_debout', 'Handi debout');
-    $form->number('benjamin_u15', 'Benjamin (U15)');
-    $form->number('junior', 'Junior (U18)');
-    $form->number('espoirs_u23', 'Espoirs (U23)');
-    $form->number('veteran', 'Veteran');
-
-    // ✅ Pré-remplissage explicite en édition
-    // Quand on est en "edit", le modèle a un id.
-    if ($form->model() && $form->model()->getKey()) {
-        $m = $form->model();
-
-        $form->fill([
-            'top_ligue'      => $m->top_ligue,
-            'mixte'          => $m->mixte,
-            'feminin'        => $m->feminin,
-            'handi_fauteuil' => $m->handi_fauteuil,
-            'handi_debout'   => $m->handi_debout,
-            'benjamin_u15'   => $m->benjamin_u15,
-            'junior'         => $m->junior,
-            'espoirs_u23'    => $m->espoirs_u23,
-            'veteran'        => $m->veteran,
-        ]);
+    // 1) Déclare les champs (sans default)
+    $inputs = [];
+    foreach ($fields as $formKey => $cfg) {
+        $inputs[$formKey] = $form->number($formKey, __($cfg['label']));
     }
 
-    // Notice (inchangée)
+    // 2) IMPORTANT : on ignore les alias à l'enregistrement
+    $form->ignore(array_keys($fields));
+
+    // 3) En EDIT : on force les valeurs (le modèle est chargé ici)
+    $form->editing(function (Form $form) use ($inputs, $fields) {
+        $m = $form->model();
+
+        foreach ($fields as $formKey => $cfg) {
+            // Le modèle contient déjà les alias grâce à ton retrieved()
+            $inputs[$formKey]->value($m->{$formKey});
+        }
+    });
+
+    // 4) Sauvegarde : mapping alias -> vraies colonnes
+    $form->saving(function (Form $form) use ($fields) {
+        $model = $form->model();
+
+        foreach ($fields as $formKey => $cfg) {
+            $value = request($formKey);
+            $value = ($value === '' ? null : $value);
+
+            $model->setAttribute($cfg['db'], $value);
+        }
+    });
+            // Affichage de ta notice en dessous du formulaire
     $form->html('
         <div class="alert alert-info text-center mt-4" role="alert" style="font-size:16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); position:relative;">
             <div style="
