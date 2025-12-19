@@ -101,64 +101,46 @@ class AdminCuescoreRegional extends AdminController
      * @return Form
      */
     protected function form()
-    {
-        $form = new Form(new CuescoreRegional());
+{
+    $form = new Form(new CuescoreRegional());
 
-        $url = admin_url('blackball/classement');
-        $form->html('               
-            <a href="' . $url . '" class="btn btn-primary" style="margin: auto; margin-bottom: 10px; justify-content:center; display:flex; width:250px;">
-                ↩️ Retour au classement Blackball
-                </a>
-            '
-        );
+    $url = admin_url('blackball/classement');
+    $form->html('
+        <a href="' . $url . '" class="btn btn-primary" style="margin: auto; margin-bottom: 10px; justify-content:center; display:flex; width:250px;">
+            ↩️ Retour au classement Blackball
+        </a>
+    ');
 
-        /**
-         * Mapping: 
-         *  - key => nom du champ dans le formulaire (propre)
-         *  - db => nom EXACT de la colonne en base (peut contenir espace / tirets)
-         *  - label => libellé affiché
-         */
-        $fields = [
-            'top_ligue' => ['db' => 'Top ligue', 'label' => 'Top ligue'],
-            'mixte' => ['db' => 'mixte', 'label' => 'Mixte'],
-            'feminin' => ['db' => 'feminin', 'label' => 'Feminin'],
-            'handi_fauteuil' => ['db' => 'handi-fauteuil', 'label' => 'Handi fauteuil'],
-            'handi_debout' => ['db' => 'handi-debout', 'label' => 'Handi debout'],
-            'benjamin_u15' => ['db' => 'benjamin (U15)', 'label' => 'Benjamin (U15)'],
-            'junior' => ['db' => 'junior', 'label' => 'Junior (U18)'],
-            'espoirs_u23' => ['db' => 'espoirs (U23)', 'label' => 'Espoirs (U23)'],
-            'veteran' => ['db' => 'veteran', 'label' => 'Veteran'],
-        ];
+    // Déclaration des champs
+    $form->number('top_ligue', 'Top ligue');
+    $form->number('mixte', 'Mixte');
+    $form->number('feminin', 'Feminin');
+    $form->number('handi_fauteuil', 'Handi fauteuil');
+    $form->number('handi_debout', 'Handi debout');
+    $form->number('benjamin_u15', 'Benjamin (U15)');
+    $form->number('junior', 'Junior (U18)');
+    $form->number('espoirs_u23', 'Espoirs (U23)');
+    $form->number('veteran', 'Veteran');
 
-        // Pré-remplissage des champs du formulaire à partir des colonnes DB "bizarre"
-        $model = $form->model();
-        foreach ($fields as $formKey => $cfg){
-            $form->number($formKey, __($cfg['label']))
-                ->default(data_get($model->getAttributes(), $cfg['db']));
-        }
+    // ✅ Pré-remplissage explicite en édition
+    // Quand on est en "edit", le modèle a un id.
+    if ($form->model() && $form->model()->getKey()) {
+        $m = $form->model();
 
-        // Sauvegarde : on remap propre -> DB
-        $form->saving(function (Form $form) use ($fields) {
-            $model = $form->model();
+        $form->fill([
+            'top_ligue'      => $m->top_ligue,
+            'mixte'          => $m->mixte,
+            'feminin'        => $m->feminin,
+            'handi_fauteuil' => $m->handi_fauteuil,
+            'handi_debout'   => $m->handi_debout,
+            'benjamin_u15'   => $m->benjamin_u15,
+            'junior'         => $m->junior,
+            'espoirs_u23'    => $m->espoirs_u23,
+            'veteran'        => $m->veteran,
+        ]);
+    }
 
-            foreach ($fields as $formKey => $cfg) {
-                // Récupère la valeur envoyé par le formulaire
-                $value = request($formKey);
-
-                // On force null quand cellule vide
-                $value = ($value === '' ? null : $value);
-
-                // Ecrit dans la VRAIE colonne en base
-                $model->setAttribute($cfg['db'], $value);
-            }
-
-            // IMPORTANT
-            // On évite que OpenAdmin tente d'écrire des colonnes "propres" inexistantes
-            foreach (array_keys($fields) as $formKey) {
-                unset($model->{$formKey});
-            }
-        });
-            // Affichage de ta notice en dessous du formulaire
+    // Notice (inchangée)
     $form->html('
         <div class="alert alert-info text-center mt-4" role="alert" style="font-size:16px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); position:relative;">
             <div style="
@@ -203,6 +185,7 @@ class AdminCuescoreRegional extends AdminController
             </div>
         </div>
     ');
-        return $form;
-    }
+
+    return $form;
+}
 }
