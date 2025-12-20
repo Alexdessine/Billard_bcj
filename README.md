@@ -1,66 +1,115 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://bcj37.fr/uploads/img/a97fed9810c39a9270caead79d014450.png"
+       alt="Logo BCJ37"
+       width="180">
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🏗️ Architecture / Schéma
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Architecture générale
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Le projet **bcj37.fr** repose sur une architecture **MVC Laravel** classique, enrichie par un **front moderne** et un **panel d’administration dédié**.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
+### Administration (OpenAdmin)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Le back-office est **totalement isolé** du site public.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Caractéristiques :
 
-## Laravel Sponsors
+- Authentification indépendante
+- Accès restreints aux administrateurs
+- Formulaires personnalisés
+- Gestion de structures legacy
+- Séparation stricte front / administration
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+### Front-end
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Le front-end est basé sur **Vite + Tailwind CSS**, optimisé pour la performance.
 
-## Contributing
+- Blade Components (`<x-layout>`, `<x-cadre>`, `<x-title>`)
+- Alpine.js pour les interactions légères
+- CSS organisé par fonctionnalités
+- Build optimisé pour la production
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+### APIs & flux de données
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **CueScore API**
+  - Classements nationaux
+  - Classements régionaux
+  - Résultats de tournois
+- **Facebook Graph API**
+  - Publications Facebook intégrées
+- **Matomo**
+  - Statistiques de fréquentation
+  - Analyse des usages
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🔐 Sécurité & bonnes pratiques
 
-## License
+### Sécurité backend
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Framework **Laravel 10** maintenu et sécurisé
+- Protection CSRF activée par défaut
+- Validation systématique des entrées utilisateur
+- Accès administrateur protégé
+- Authentification API via **Laravel Sanctum**
+
+---
+
+### Sécurité des données
+
+- Aucune clé API exposée côté client
+- Variables sensibles stockées dans `.env`
+- Séparation stricte entre :
+  - données publiques
+  - données administratives
+- Accès restreints aux fonctionnalités sensibles
+
+---
+
+### Bonnes pratiques de développement
+
+- Respect strict de l’architecture MVC
+- Logique métier séparée de l’affichage
+- Helpers dédiés pour les traitements complexes
+- Aucune logique métier lourde dans les vues
+- Assets compilés via Vite
+- Versionnement Git
+
+---
+
+### Bonnes pratiques OpenAdmin
+
+- Back-office isolé du front public
+- Gestion explicite des champs ignorés (`ignore()`)
+- Mapping manuel pour colonnes legacy
+- Aucune modification des schémas historiques
+- Formulaires robustes malgré des noms de colonnes non standards
+
+---
+
+### Performance & maintenance
+
+- Minification JS et CSS activée
+- Sourcemaps désactivées en production
+- CSS découpé par fonctionnalité
+- Requêtes API maîtrisées
+- Architecture modulaire facilitant la maintenance
+
+---
+
+### Analytics & conformité
+
+- Utilisation de **Matomo** (auto-hébergé)
+- Aucune dépendance à Google Analytics
+- Respect de la vie privée des utilisateurs
+- Outils de suivi adaptés à un contexte associatif
